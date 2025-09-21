@@ -1,3 +1,4 @@
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/ui/onboarding/onboarding_screen.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_theme.dart';
@@ -13,6 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        locale: Locale('ar'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.onboardingRouteName,
         routes: {
           AppRoutes.onboardingRouteName: (context) => OnBoardingScreen()

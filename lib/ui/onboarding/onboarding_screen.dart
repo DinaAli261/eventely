@@ -35,6 +35,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     );
 
     return IntroductionScreen(
+      rtl: (Directionality.of(context) == TextDirection.rtl) ? true : false,
       key: introKey,
       globalBackgroundColor: (isDark) ? AppColors.darkBlue : AppColors.white,
       allowImplicitScrolling: true,
@@ -203,6 +204,7 @@ Widget createBodyWidget(String body, bool isDark, {bool isFirst = false}) {
 
 Widget createRow(String name) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
         name,
@@ -212,7 +214,6 @@ Widget createRow(String name) {
           fontSize: 20,
         ),
       ),
-      Spacer(),
       Image.asset('assets/images/$name.png'),
     ],
   );
