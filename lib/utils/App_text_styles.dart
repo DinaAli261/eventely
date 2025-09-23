@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
@@ -12,5 +12,15 @@ class AppTextStyles {
     fontSize: 20.0,
     fontWeight: FontWeight.bold,
     color: AppColors.blue,
+  );
+  static final TextStyle black20Bold = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.black,
+  );
+  static final TextStyle offWhite20Bold = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.offWhite,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -163,11 +164,7 @@ Widget createTitleWidget(String title) {
   return Align(
     alignment: AlignmentGeometry.centerLeft,
     child: Text(
-      style: TextStyle(
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
-        color: AppColors.blue,
-      ),
+      style: AppTextStyles.blue20Bold,
       title,
     ),
   );
@@ -208,11 +205,7 @@ Widget createRow(String name) {
     children: [
       Text(
         name,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          color: AppColors.blue,
-          fontSize: 20,
-        ),
+        style: AppTextStyles.blue20Medium,
       ),
       Image.asset('assets/images/$name.png'),
     ],
