@@ -4,5 +4,10 @@
 "arabic":"Arabic",
 "theme":"Theme",
 "dark":"Dark",
-"light":"Light"
+"light":"Light",
+"logout":"Logout",
+"home":"Home",
+"map":"Map",
+"love":"Love",
+"profile":"Profile"
 }
