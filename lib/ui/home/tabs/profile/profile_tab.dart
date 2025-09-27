@@ -4,6 +4,7 @@ import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,84 +24,132 @@ class _ProfileTabState extends State<ProfileTab> {
     var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * 0.04,
-          vertical: height * 0.028,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(AppImages.routeProfile),
+              SizedBox(width: width * 0.04,),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('RouteAcademy', style: AppTextStyles.offWhite24Bold,),
+                    Text('routeacadmy@gmail.com',
+                      style: AppTextStyles.offWhite16Medium,
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
+                      maxLines: 3,
+                    )
+
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.language,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            SizedBox(height: height * 0.019),
-            InkWell(
-              onTap: () {
-                showLanguageBottomSheet();
-              },
-              child: Container(
-                padding: EdgeInsets.all(width * 0.04),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: BoxBorder.all(width: 1, color: AppColors.blue),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      (languageProvider.appLanguage == 'en')
-                          ? AppLocalizations.of(context)!.english
-                          : AppLocalizations.of(context)!.arabic,
-                      style: AppTextStyles.blue20Bold,
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: AppColors.blue,
-                      size: height * 0.04,
-                    ),
-                  ],
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.04,
+            vertical: height * 0.028,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.language,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headlineLarge,
+              ),
+              SizedBox(height: height * 0.019),
+              InkWell(
+                onTap: () {
+                  showLanguageBottomSheet();
+                },
+                child: Container(
+                  padding: EdgeInsets.all(width * 0.04),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: BoxBorder.all(width: 1, color: AppColors.blue),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        (languageProvider.appLanguage == 'en')
+                            ? AppLocalizations.of(context)!.english
+                            : AppLocalizations.of(context)!.arabic,
+                        style: AppTextStyles.blue20Bold,
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: AppColors.blue,
+                        size: height * 0.04,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: height * 0.019),
-            Text(
-              AppLocalizations.of(context)!.theme,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            SizedBox(height: height * 0.019),
-            InkWell(
-              onTap: () {
-                showThemeBottomSheet();
-              },
-              child: Container(
-                padding: EdgeInsets.all(width * 0.04),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: BoxBorder.all(width: 1, color: AppColors.blue),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      (themeProvider.appTheme == ThemeMode.light)
-                          ? AppLocalizations.of(context)!.light
-                          : AppLocalizations.of(context)!.dark,
-                      style: AppTextStyles.blue20Bold,
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: AppColors.blue,
-                      size: height * 0.04,
-                    ),
-                  ],
+              SizedBox(height: height * 0.019),
+              Text(
+                AppLocalizations.of(context)!.theme,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headlineLarge,
+              ),
+              SizedBox(height: height * 0.019),
+              InkWell(
+                onTap: () {
+                  showThemeBottomSheet();
+                },
+                child: Container(
+                  padding: EdgeInsets.all(width * 0.04),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: BoxBorder.all(width: 1, color: AppColors.blue),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        (themeProvider.appTheme == ThemeMode.light)
+                            ? AppLocalizations.of(context)!.light
+                            : AppLocalizations.of(context)!.dark,
+                        style: AppTextStyles.blue20Bold,
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: AppColors.blue,
+                        size: height * 0.04,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Spacer(),
+              ElevatedButton(onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(16)),
+                      padding: EdgeInsets.all(height * 0.019)
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout, color: AppColors.offWhite,
+                        size: width * 0.06,),
+                      SizedBox(width: width * 0.02,),
+                      Text(AppLocalizations.of(context)!.logout,
+                        style: AppTextStyles.offWhite20Regular,),
+
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
     );

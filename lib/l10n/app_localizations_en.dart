@@ -26,4 +26,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get light => 'Light';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get map => 'Map';
+
+  @override
+  String get love => 'Love';
+
+  @override
+  String get profile => 'Profile';
 }

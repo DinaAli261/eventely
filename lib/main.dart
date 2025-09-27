@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.profileRouteName,
+      initialRoute: AppRoutes.homeScreenRouteName,
         routes: {
           AppRoutes.onboardingRouteName: (context) => OnBoardingScreen(),
           AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
