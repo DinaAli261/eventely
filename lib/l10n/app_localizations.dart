@@ -163,6 +163,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// No description provided for @cairo.
+  ///
+  /// In en, this message translates to:
+  /// **'Cairo'**
+  String get cairo;
+
+  /// No description provided for @egypt.
+  ///
+  /// In en, this message translates to:
+  /// **'Egypt'**
+  String get egypt;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get sport;
+
+  /// No description provided for @birthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get birthday;
+
+  /// No description provided for @en.
+  ///
+  /// In en, this message translates to:
+  /// **'EN'**
+  String get en;
 }
 
 class _AppLocalizationsDelegate

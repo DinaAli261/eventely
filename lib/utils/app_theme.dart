@@ -5,15 +5,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.darkBlue,
-      appBarTheme: AppBarThemeData(
-        backgroundColor: AppColors.blue,
-          toolbarHeight: 156,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.only(
-                bottomLeft: Radius.circular(64),
-              )
-          )
-      ),
+      primaryColor: AppColors.darkBlue,
       textTheme: TextTheme(
         headlineLarge: AppTextStyles.offWhite20Bold,
       ),
@@ -22,8 +14,8 @@ class AppTheme {
         backgroundColor: AppColors.darkBlue,
         selectedItemColor: AppColors.white,
         unselectedItemColor: AppColors.white,
-        selectedLabelStyle: AppTextStyles.White12Bold,
-        unselectedLabelStyle: AppTextStyles.White12Bold,
+        selectedLabelStyle: AppTextStyles.white12Bold,
+        unselectedLabelStyle: AppTextStyles.white12Bold,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.darkBlue,
@@ -37,15 +29,7 @@ class AppTheme {
   );
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
-    appBarTheme: AppBarThemeData(
-        toolbarHeight: 156,
-      backgroundColor: AppColors.blue,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.only(
-              bottomLeft: Radius.circular(64),
-            )
-        )
-    ),
+      primaryColor: AppColors.blue,
     textTheme: TextTheme(
       headlineLarge: AppTextStyles.black20Bold,
     ),
@@ -54,8 +38,8 @@ class AppTheme {
         backgroundColor: AppColors.blue,
         selectedItemColor: AppColors.white,
         unselectedItemColor: AppColors.white,
-        selectedLabelStyle: AppTextStyles.White12Bold,
-        unselectedLabelStyle: AppTextStyles.White12Bold,
+        selectedLabelStyle: AppTextStyles.white12Bold,
+        unselectedLabelStyle: AppTextStyles.white12Bold,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.blue,
