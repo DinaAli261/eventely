@@ -2,6 +2,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/shared_preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
             onTap: () {
               languageProvider.changeLanguage('en');
               selectedLanguage = 'en';
+              saveLastLang("en");
             },
             child: getEnglishItemWidget(selectedLanguage),
           ),
@@ -40,6 +42,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
             onTap: () {
               languageProvider.changeLanguage('ar');
               selectedLanguage = 'ar';
+              saveLastLang("ar");
             },
             child: getArabicItemWidget(selectedLanguage),
           ),

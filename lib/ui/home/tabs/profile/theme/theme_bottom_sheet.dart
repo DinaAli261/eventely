@@ -1,3 +1,4 @@
+import 'package:evently/utils/shared_preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
             onTap: () {
               themeProvider.changeTheme(ThemeMode.light);
               selectedTheme = ThemeMode.light;
+              saveLastTheme("light");
             },
             child: getLightItemWidget(selectedTheme),
           ),
@@ -41,6 +43,7 @@ class _ThemeBottomSheetState extends State<ThemeBottomSheet> {
             onTap: () {
               themeProvider.changeTheme(ThemeMode.dark);
               selectedTheme = ThemeMode.dark;
+              saveLastTheme("dark");
             },
             child: getDarkItemWidget(selectedTheme),
           ),

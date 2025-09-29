@@ -41,4 +41,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get welcomeBack => 'Welcome Back';
+
+  @override
+  String get cairo => 'Cairo';
+
+  @override
+  String get egypt => 'Egypt';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get birthday => 'Birthday';
+
+  @override
+  String get en => 'EN';
 }

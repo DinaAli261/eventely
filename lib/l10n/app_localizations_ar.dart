@@ -41,4 +41,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profile => 'الملف الشخصي';
+
+  @override
+  String get welcomeBack => 'أهلا بعودتك';
+
+  @override
+  String get cairo => 'القاهرة';
+
+  @override
+  String get egypt => 'مصر';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get sport => 'رياضه';
+
+  @override
+  String get birthday => 'عيد ميلاد';
+
+  @override
+  String get en => 'ع';
 }

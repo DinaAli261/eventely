@@ -38,9 +38,19 @@ class AppTextStyles {
     color: AppColors.offWhite,
     fontSize: 20,
   );
-  static final TextStyle White12Bold = TextStyle(
+  static final TextStyle white12Bold = TextStyle(
     fontSize: 12.0,
     fontWeight: FontWeight.bold,
     color: AppColors.white,
+  );
+  static final TextStyle offWhite14Regular = TextStyle(
+    fontWeight: FontWeight.w400,
+    color: AppColors.white,
+    fontSize: 14,
+  );
+  static final TextStyle offWhite14Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.offWhite,
+    fontSize: 14,
   );
 }

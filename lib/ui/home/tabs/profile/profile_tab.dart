@@ -27,6 +27,13 @@ class _ProfileTabState extends State<ProfileTab> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.blue,
+          toolbarHeight: 156,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.only(
+                bottomLeft: Radius.circular(64),
+              )
+          ),
           title: Row(
             children: [
               Image.asset(AppImages.routeProfile),
@@ -147,7 +154,8 @@ class _ProfileTabState extends State<ProfileTab> {
                         style: AppTextStyles.offWhite20Regular,),
 
                     ],
-                  ))
+                  )),
+              SizedBox(height: height * 0.025)
             ],
           ),
         ),
