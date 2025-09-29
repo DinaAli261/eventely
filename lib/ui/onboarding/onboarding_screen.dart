@@ -53,36 +53,6 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       pages: [
         PageViewModel(
-          titleWidget: createTitleWidget("Personalize Your Experience"),
-          bodyWidget: createBodyWidget(
-            "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
-            isDark,
-            isFirst: true,
-          ),
-          image: _buildImage((isDark) ? 'onboarding1_dark' : 'onboarding1'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(16),
-              backgroundColor: AppColors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-            ),
-            child: const Text(
-              'Let’s Start',
-              style: TextStyle(color: AppColors.white),
-            ),
-          ),
-          decoration: pageDecoration.copyWith(
-            bodyFlex: 6,
-            imageFlex: 6,
-            safeArea: 80,
-          ),
-        ),
-        PageViewModel(
           titleWidget: createTitleWidget("Find Events That Inspire You"),
           bodyWidget: createBodyWidget(
             "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
@@ -182,32 +152,9 @@ Widget createBodyWidget(String body, bool isDark, {bool isFirst = false}) {
           ),
           body,
         ),
-      ),
-      (isFirst)
-          ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 28),
-              child: Column(
-                children: [
-                  createRow('Language'),
-                  SizedBox(height: 16),
-                  createRow('Theme'),
-                ],
-              ),
-            )
-          : SizedBox(),
+      ), SizedBox(),
     ],
   );
 }
 
-Widget createRow(String name) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        name,
-        style: AppTextStyles.blue20Medium,
-      ),
-      Image.asset('assets/images/$name.png'),
-    ],
-  );
-}
+

@@ -62,4 +62,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get en => 'ع';
+
+  @override
+  String get fristScreenBody =>
+      'اختر السمة واللغة المفضلة لديك للبدء بتجربة مريحة ومخصصة تناسب أسلوبك.';
+
+  @override
+  String get firstScreenTitle => 'خصّص تجربتك';
 }

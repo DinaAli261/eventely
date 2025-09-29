@@ -205,6 +205,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EN'**
   String get en;
+
+  /// No description provided for @fristScreenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.'**
+  String get fristScreenBody;
+
+  /// No description provided for @firstScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize Your Experience'**
+  String get firstScreenTitle;
 }
 
 class _AppLocalizationsDelegate

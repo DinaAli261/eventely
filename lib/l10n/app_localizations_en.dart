@@ -62,4 +62,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get en => 'EN';
+
+  @override
+  String get fristScreenBody =>
+      'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.';
+
+  @override
+  String get firstScreenTitle => 'Personalize Your Experience';
 }
