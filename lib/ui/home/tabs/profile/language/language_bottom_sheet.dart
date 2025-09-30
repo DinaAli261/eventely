@@ -31,8 +31,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
         children: [
           InkWell(
             onTap: () {
-              languageProvider.changeLanguage('en');
-              selectedLanguage = 'en';
+              languageProvider.changeLanguage("en");
+              selectedLanguage = "en";
               saveLastLang("en");
             },
             child: getEnglishItemWidget(selectedLanguage),
@@ -40,8 +40,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           SizedBox(height: height * 0.02),
           InkWell(
             onTap: () {
-              languageProvider.changeLanguage('ar');
-              selectedLanguage = 'ar';
+              languageProvider.changeLanguage("ar");
+              selectedLanguage = "ar";
               saveLastLang("ar");
             },
             child: getArabicItemWidget(selectedLanguage),

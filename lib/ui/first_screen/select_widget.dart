@@ -72,7 +72,7 @@ class _SelectWidgetState extends State<SelectWidget> {
                   ? {
                       isSelectedAr = false,
                       isSelectedEN = true,
-                      languageProvider.changeLanguage('en'),
+                      languageProvider.changeLanguage("en"),
                       saveLastLang("en"),
                     }
                   : {

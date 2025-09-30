@@ -10,7 +10,7 @@ import '../../utils/app_colors.dart';
 
 class FirstScreen extends StatefulWidget {
 
-  FirstScreen({super.key});
+  const FirstScreen({super.key});
 
   @override
   State<FirstScreen> createState() => _FirstScreenState();
@@ -24,17 +24,21 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
     var themeProvider = Provider.of<AppThemeProvider>(context);
     final isDark = themeProvider.appTheme == ThemeMode.dark;
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(width * 0.04),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              buildImage('onboarding', 159),
+              buildImage('onboarding', width * 0.40),
               buildImage((isDark) ? 'onboarding1_dark' : 'onboarding1'),
               Text(
                 AppLocalizations.of(context)!.firstScreenTitle,
@@ -75,7 +79,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       AppRoutes.onboardingRouteName);
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(width * 0.04),
                   backgroundColor: AppColors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -93,34 +97,3 @@ class _FirstScreenState extends State<FirstScreen> {
     );
   }
 }
-
-//PageViewModel(
-//           titleWidget: createTitleWidget("Personalize Your Experience"),
-//           bodyWidget: createBodyWidget(
-//             "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.",
-//             isDark,
-//             isFirst: true,
-//           ),
-//           image: _buildImage((isDark) ? 'onboarding1_dark' : 'onboarding1'),
-//           footer: ElevatedButton(
-//             onPressed: () {
-//               introKey.currentState?.animateScroll(0);
-//             },
-//             style: ElevatedButton.styleFrom(
-//               padding: EdgeInsets.all(16),
-//               backgroundColor: AppColors.blue,
-//               shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(16.0),
-//               ),
-//             ),
-//             child: const Text(
-//               'Let’s Start',
-//               style: TextStyle(color: AppColors.white),
-//             ),
-//           ),
-//           decoration: pageDecoration.copyWith(
-//             bodyFlex: 6,
-//             imageFlex: 6,
-//             safeArea: 80,
-//           ),
-//         ),
