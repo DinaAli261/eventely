@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../providers/app_theme_provider.dart';
 import '../home/home_screen.dart';
 
@@ -59,20 +60,19 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       pages: [
         PageViewModel(
           titleWidget: createTitleWidget(
-            //AppLocalizations.of(context)!.firstOnboardingTitle,isAR),
-              "", isAR),
+              AppLocalizations.of(context)!.firstOnboardingTitle, isAR),
           bodyWidget: createBodyWidget(
-            //AppLocalizations.of(context)!.firstOnboardingBody,
-            "",
+            AppLocalizations.of(context)!.firstOnboardingBody,
             isDark,
           ),
           image: _buildImage((isDark) ? 'onboarding2_dark' : 'onboarding2'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: createTitleWidget("", isAR),
+          titleWidget: createTitleWidget(
+              AppLocalizations.of(context)!.secondOnboardingTitle, isAR),
           bodyWidget: createBodyWidget(
-            "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
+            AppLocalizations.of(context)!.secondOnboardingBody,
             isDark,
           ),
           image: _buildImage((isDark) ? 'onboarding3_dark' : 'onboarding3'),
@@ -80,10 +80,10 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
         PageViewModel(
           titleWidget: createTitleWidget(
-              "Connect with Friends & Share Moments", isAR
+              AppLocalizations.of(context)!.thirdOnboardingTitle, isAR
           ),
           bodyWidget: createBodyWidget(
-            "",
+            AppLocalizations.of(context)!.thirdOnboardingBody,
             isDark,
           ),
           image: _buildImage((isDark) ? "onboarding4_dark" : "onboarding4"),

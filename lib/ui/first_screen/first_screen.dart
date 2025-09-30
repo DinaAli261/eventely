@@ -41,8 +41,7 @@ class _FirstScreenState extends State<FirstScreen> {
                 style: AppTextStyles.blue20Bold,
               ),
               Text(
-                // AppLocalizations.of(context)!.firstScreenBody,
-                "",
+                AppLocalizations.of(context)!.firstScreenBody,
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500,
