@@ -1,15 +1,20 @@
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/ui/first_screen/select_widget.dart';
 import 'package:evently/utils/App_text_styles.dart';
-import 'package:evently/utils/app_images.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/app_theme_provider.dart';
 import '../../utils/app_colors.dart';
 
 class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+
+  FirstScreen({super.key});
 
   @override
   State<FirstScreen> createState() => _FirstScreenState();
+
 }
 
 class _FirstScreenState extends State<FirstScreen> {
@@ -19,8 +24,8 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool switchValue = true;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    var themeProvider = Provider.of<AppThemeProvider>(context);
+    final isDark = themeProvider.appTheme == ThemeMode.dark;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -36,7 +41,8 @@ class _FirstScreenState extends State<FirstScreen> {
                 style: AppTextStyles.blue20Bold,
               ),
               Text(
-                AppLocalizations.of(context)!.fristScreenBody,
+                // AppLocalizations.of(context)!.firstScreenBody,
+                "",
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500,
@@ -50,10 +56,9 @@ class _FirstScreenState extends State<FirstScreen> {
                     AppLocalizations.of(context)!.language,
                     style: AppTextStyles.blue20Medium,
                   ),
+                  SelectWidget(isLang: true,),
                 ],
               ),
-              Image.asset(AppImages.eg, height: 20, width: 20),
-              Image.asset(AppImages.us, height: 20, width: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,23 +66,15 @@ class _FirstScreenState extends State<FirstScreen> {
                     AppLocalizations.of(context)!.theme,
                     style: AppTextStyles.blue20Medium,
                   ),
+                  SelectWidget(isLang: false,),
 
-                  Switch(
-                    activeThumbImage: AssetImage(AppImages.eg),
-                    inactiveThumbImage: AssetImage(AppImages.us),
-                    activeThumbColor: AppColors.transparent,
-                    inactiveThumbColor: AppColors.transparent,
-                    value: switchValue,
-                    onChanged: (value) {
-                      setState(() {
-                        switchValue = value;
-                      });
-                    },
-                  ),
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(
+                      AppRoutes.onboardingRouteName);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(16),
                   backgroundColor: AppColors.blue,

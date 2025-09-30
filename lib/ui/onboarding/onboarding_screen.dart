@@ -1,9 +1,12 @@
+import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/app_theme_provider.dart';
 import '../home/home_screen.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -25,10 +28,12 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/images/$assetName.png', width: width);
   }
-
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    var themeProvider = Provider.of<AppThemeProvider>(context);
+    var languageProvider = Provider.of<AppLanguageProvider>(context);
+    bool isAR = languageProvider.appLanguage == "ar";
+    bool isDark = themeProvider.appTheme == ThemeMode.dark;
     final pageDecoration = PageDecoration(
       pageMargin: const EdgeInsets.only(top: 150),
       bodyPadding: const EdgeInsets.fromLTRB(0, 0.0, 16.0, 16.0),
@@ -53,16 +58,19 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       pages: [
         PageViewModel(
-          titleWidget: createTitleWidget("Find Events That Inspire You"),
+          titleWidget: createTitleWidget(
+            //AppLocalizations.of(context)!.firstOnboardingTitle,isAR),
+              "", isAR),
           bodyWidget: createBodyWidget(
-            "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
+            //AppLocalizations.of(context)!.firstOnboardingBody,
+            "",
             isDark,
           ),
           image: _buildImage((isDark) ? 'onboarding2_dark' : 'onboarding2'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          titleWidget: createTitleWidget("Effortless Event Planning"),
+          titleWidget: createTitleWidget("", isAR),
           bodyWidget: createBodyWidget(
             "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
             isDark,
@@ -72,10 +80,10 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
         PageViewModel(
           titleWidget: createTitleWidget(
-            "Connect with Friends & Share Moments",
+              "Connect with Friends & Share Moments", isAR
           ),
           bodyWidget: createBodyWidget(
-            "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
+            "",
             isDark,
           ),
           image: _buildImage((isDark) ? "onboarding4_dark" : "onboarding4"),
@@ -130,9 +138,10 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 }
 
-Widget createTitleWidget(String title) {
+Widget createTitleWidget(String title, bool isAR) {
   return Align(
-    alignment: AlignmentGeometry.centerLeft,
+    alignment: (isAR) ? AlignmentGeometry.centerRight : AlignmentGeometry
+        .centerLeft,
     child: Text(
       style: AppTextStyles.blue20Bold,
       title,
@@ -140,18 +149,16 @@ Widget createTitleWidget(String title) {
   );
 }
 
-Widget createBodyWidget(String body, bool isDark, {bool isFirst = false}) {
+Widget createBodyWidget(String body, bool isDark,) {
   return Column(
     children: [
-      Align(
-        child: Text(
-          style: TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
-            color: (isDark) ? AppColors.white : AppColors.black,
-          ),
-          body,
+      Text(
+        style: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w500,
+          color: (isDark) ? AppColors.white : AppColors.black,
         ),
+        body,
       ), SizedBox(),
     ],
   );
