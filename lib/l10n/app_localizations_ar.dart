@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -62,4 +61,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get en => 'ع';
+
+  @override
+  String get firstScreenBody =>
+      'اختر السمة واللغة المفضلة لديك للبدء بتجربة مريحة ومخصصة تناسب أسلوبك.';
+
+  @override
+  String get firstScreenTitle => 'خصّص تجربتك';
+
+  @override
+  String get firstOnboardingTitle => 'ابحث عن فعاليات تُلهمك.';
+
+  @override
+  String get firstOnboardingBody =>
+      'انغمس في عالم من الفعاليات المصممة لتناسب اهتماماتك الفريدة. سواء كنت من محبي الموسيقى الحية، ورش العمل الفنية، الشبكات المهنية، أو ببساطة استكشاف تجارب جديدة، لدينا ما يناسب الجميع. توصياتنا المُختارة بعناية ستساعدك على الاستكشاف والتواصل والاستفادة القصوى من كل فرصة من حولك.';
+
+  @override
+  String get secondOnboardingTitle => 'تخطيط الفعاليات بكل سهولة';
+
+  @override
+  String get secondOnboardingBody =>
+      'تخلّص من عناء تنظيم الفعاليات باستخدام أدواتنا الشاملة للتخطيط. من إعداد الدعوات وإدارة الردود إلى جدولة التذكيرات وتنسيق التفاصيل – نحن نهتم بكل شيء. خطط بكل سهولة وركّز على الأهم: خلق تجربة لا تُنسى لك ولضيوفك.';
+
+  @override
+  String get thirdOnboardingTitle => 'تواصل مع الأصدقاء وشارك اللحظات';
+
+  @override
+  String get thirdOnboardingBody =>
+      'اجعل كل فعالية لا تُنسى من خلال مشاركة التجربة مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء، وإبقاء الجميع على اطلاع، والاحتفال باللحظات معًا. التقط وشارك اللحظات المميزة مع شبكتك لتسترجع أجمل اللحظات وتحتفظ بالذكريات.';
 }
