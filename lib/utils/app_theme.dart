@@ -6,8 +6,13 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
       scaffoldBackgroundColor: AppColors.darkBlue,
       primaryColor: AppColors.darkBlue,
+      focusColor: AppColors.blue,
+      cardColor: AppColors.darkBlue,
+      secondaryHeaderColor: AppColors.offWhite,
       textTheme: TextTheme(
         headlineLarge: AppTextStyles.offWhite20Bold,
+          headlineMedium: AppTextStyles.offWhite16Medium,
+          headlineSmall: AppTextStyles.offWhite14Bold
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -30,8 +35,13 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
       primaryColor: AppColors.blue,
+      cardColor: AppColors.white,
+      secondaryHeaderColor: AppColors.blue,
+      focusColor: AppColors.offWhite,
     textTheme: TextTheme(
       headlineLarge: AppTextStyles.black20Bold,
+        headlineMedium: AppTextStyles.blue16Medium,
+        headlineSmall: AppTextStyles.black14Bold
     ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,

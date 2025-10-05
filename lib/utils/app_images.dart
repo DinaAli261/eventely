@@ -10,4 +10,7 @@ class AppImages {
   static final String selectedLove = 'assets/images/selectedLove.png';
   static final String eg = 'assets/images/eg.png';
   static final String us = 'assets/images/us.png';
+  static final String sport = 'assets/images/sport.png';
+  static final String birthday = 'assets/images/birthday.png';
+
 }

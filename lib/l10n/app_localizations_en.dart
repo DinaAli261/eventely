@@ -89,4 +89,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get thirdOnboardingBody =>
       'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.';
+
+  @override
+  String get meeting => 'Meeting';
+
+  @override
+  String get gaming => 'Gaming';
+
+  @override
+  String get workshop => 'Workshop';
+
+  @override
+  String get bookClub => 'Book club';
+
+  @override
+  String get exhibition => 'Exhibition';
+
+  @override
+  String get holiday => 'Holiday';
+
+  @override
+  String get eating => 'Eating';
 }
