@@ -12,5 +12,5 @@ class AppImages {
   static final String us = 'assets/images/us.png';
   static final String sport = 'assets/images/sport.png';
   static final String birthday = 'assets/images/birthday.png';
-
+  static final String meeting = 'assets/images/meeting.png';
 }
