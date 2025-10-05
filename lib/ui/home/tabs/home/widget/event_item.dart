@@ -1,4 +1,3 @@
-import 'package:evently/ui/home/tabs/home/widget/event_tab_item.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
@@ -36,7 +35,7 @@ class _EventItemState extends State<EventItem> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-              image: AssetImage(AppImages.birthday), fit: BoxFit.fill),
+              image: AssetImage(AppImages.meeting), fit: BoxFit.fill),
         ),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -73,4 +73,9 @@ class AppTextStyles {
     color: AppColors.black,
     fontSize: 14,
   );
+  static final TextStyle grey16Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.grey,
+    fontSize: 16,
+  );
 }

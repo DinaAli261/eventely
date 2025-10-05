@@ -149,7 +149,7 @@ class _HomeTabState extends State<HomeTab> {
             margin: EdgeInsets.only(
                 top: height * 0.019
             ),
-            height: 0.62 * height,
+            height: 0.64 * height,
             child: Expanded(child: ListView.separated(
               itemBuilder: (context, index) {
                 return EventItem();
