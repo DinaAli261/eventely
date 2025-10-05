@@ -54,7 +54,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get all => 'الكل';
 
   @override
-  String get sport => 'رياضه';
+  String get sport => 'رياضة';
 
   @override
   String get birthday => 'عيد ميلاد';
@@ -89,4 +89,25 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get thirdOnboardingBody =>
       'اجعل كل فعالية لا تُنسى من خلال مشاركة التجربة مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء، وإبقاء الجميع على اطلاع، والاحتفال باللحظات معًا. التقط وشارك اللحظات المميزة مع شبكتك لتسترجع أجمل اللحظات وتحتفظ بالذكريات.';
+
+  @override
+  String get meeting => 'اجتماع';
+
+  @override
+  String get gaming => 'ألعاب';
+
+  @override
+  String get workshop => 'ورشة عمل';
+
+  @override
+  String get bookClub => 'نادي كتاب';
+
+  @override
+  String get exhibition => 'معرض';
+
+  @override
+  String get holiday => 'عطلة';
+
+  @override
+  String get eating => 'أكل';
 }
