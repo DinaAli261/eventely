@@ -34,5 +34,14 @@
 "bookClub":"نادي كتاب",
 "exhibition":"معرض",
 "holiday":"عطلة",
-"eating":"أكل"
+"eating":"أكل",
+"searchForEvent":"البحث عن حدث",
+"email":"ايميل",
+"password":"كلمه المرور",
+"forgetPassword":"نسيت رقم المرور ؟",
+"login":"تسجيل الدخول",
+"doNotHaveAccount":"ليس لديك حساب ؟",
+"createAccount":"انشاء حساب",
+"or":"او",
+"loginWithGoogle":"تسجيل الدخول بأستخدام جوجل"
 }

@@ -1,3 +1,4 @@
+import 'package:evently/auth/login/login_screen.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
@@ -30,13 +31,13 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeScreenRouteName,
+      initialRoute: AppRoutes.loginScreenRouteName,
         routes: {
           AppRoutes.onboardingRouteName: (context) => OnBoardingScreen(),
           AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
           AppRoutes.profileRouteName: (context) => ProfileTab(),
-          AppRoutes.firstScreenRouteName: (context) => FirstScreen()
-
+          AppRoutes.firstScreenRouteName: (context) => FirstScreen(),
+          AppRoutes.loginScreenRouteName: (context) => LoginScreen()
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,

@@ -34,5 +34,14 @@
 "bookClub":"Book club",
 "exhibition":"Exhibition",
 "holiday":"Holiday",
-"eating":"Eating"
+"eating":"Eating",
+"searchForEvent":"Search For Event",
+"email":"Email",
+"password":"Password",
+"forgetPassword":"Forget Password ?",
+"login":"Login",
+"doNotHaveAccount":"Don't Have Account ?",
+"createAccount":"Create Account",
+"or":"Or",
+"loginWithGoogle":"Login With Google"
 }

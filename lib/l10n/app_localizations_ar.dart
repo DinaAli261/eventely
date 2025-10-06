@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -110,4 +111,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get eating => 'أكل';
+
+  @override
+  String get searchForEvent => 'البحث عن حدث';
+
+  @override
+  String get email => 'ايميل';
+
+  @override
+  String get password => 'كلمه المرور';
+
+  @override
+  String get forgetPassword => 'نسيت رقم المرور ؟';
+
+  @override
+  String get login => 'تسجيل الدخول';
+
+  @override
+  String get doNotHaveAccount => 'ليس لديك حساب ؟';
+
+  @override
+  String get createAccount => 'انشاء حساب';
+
+  @override
+  String get or => 'او';
+
+  @override
+  String get loginWithGoogle => 'تسجيل الدخول بأستخدام جوجل';
 }

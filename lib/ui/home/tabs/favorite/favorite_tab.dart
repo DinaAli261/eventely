@@ -18,33 +18,35 @@ class FavoriteTab extends StatelessWidget {
         .of(context)
         .size
         .height;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(height * 0.019),
-          child: CustomTextFormField(
-            borderSideColor: AppColors.blue,
-            prefixIcon: Icon(Icons.search, color: AppColors.blue),
-            hintText: "Search for Event",
-            hintStyle: AppTextStyles.blue14Bold,
+    return SafeArea(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(height * 0.019),
+            child: CustomTextFormField(
+              borderSideColor: AppColors.blue,
+              prefixIcon: Icon(Icons.search, color: AppColors.blue),
+              hintText: "Search for Event",
+              hintStyle: AppTextStyles.blue14Bold,
 
+            ),
           ),
-        ),
-        SizedBox(
-          height: 0.756 * height,
-          child: Expanded(child: ListView.separated(
-            itemBuilder: (context, index) {
-              return EventItem();
-            },
-            itemCount: 20,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: height * 0.019,);
-            },
+          SizedBox(
+            height: 0.756 * height,
+            child: Expanded(child: ListView.separated(
+              itemBuilder: (context, index) {
+                return EventItem();
+              },
+              itemCount: 20,
+              separatorBuilder: (context, index) {
+                return SizedBox(height: height * 0.019,);
+              },
+            )
+            ),
           )
-          ),
-        )
 
-      ],
+        ],
+      ),
     );
   }
 }
