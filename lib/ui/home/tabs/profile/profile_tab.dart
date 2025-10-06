@@ -2,6 +2,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
+import 'package:evently/ui/home/widget/custom_elevated_button.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
@@ -138,23 +139,14 @@ class _ProfileTabState extends State<ProfileTab> {
                 ),
               ),
               Spacer(),
-              ElevatedButton(onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.red,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(16)),
-                      padding: EdgeInsets.all(height * 0.019)
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout, color: AppColors.offWhite,
-                        size: width * 0.06,),
-                      SizedBox(width: width * 0.02,),
-                      Text(AppLocalizations.of(context)!.logout,
-                        style: AppTextStyles.offWhite20Regular,),
-
-                    ],
-                  )),
+              CustomElevatedButton(
+                onPressed: () {},
+                text: AppLocalizations.of(context)!.logout,
+                icon: Icon(
+                  Icons.logout, color: AppColors.offWhite, size: width * 0.06,),
+                textStyle: AppTextStyles.offWhite20Regular,
+                haveIcon: true,
+                backgroundColor: AppColors.red,),
               SizedBox(height: height * 0.025)
             ],
           ),

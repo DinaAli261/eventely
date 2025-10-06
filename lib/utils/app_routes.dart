@@ -3,4 +3,5 @@ class AppRoutes {
   static const homeScreenRouteName = 'home';
   static const profileRouteName = 'profile';
   static const firstScreenRouteName = 'first';
+  static const loginScreenRouteName = 'login';
 }

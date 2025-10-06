@@ -78,4 +78,20 @@ class AppTextStyles {
     color: AppColors.grey,
     fontSize: 16,
   );
+  static final TextStyle blue16ItalicBold = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    color: AppColors.blue,
+    fontStyle: FontStyle.italic,
+  );
+  static final TextStyle offWhite20Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.offWhite,
+    fontSize: 20,
+  );
+  static final TextStyle black16Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.black,
+    fontSize: 16,
+  );
 }

@@ -295,6 +295,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Eating'**
   String get eating;
+
+  /// No description provided for @searchForEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Search For Event'**
+  String get searchForEvent;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @forgetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password ?'**
+  String get forgetPassword;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @doNotHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t Have Account ?'**
+  String get doNotHaveAccount;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @loginWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login With Google'**
+  String get loginWithGoogle;
 }
 
 class _AppLocalizationsDelegate
