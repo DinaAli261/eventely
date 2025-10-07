@@ -30,7 +30,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
         padding: EdgeInsets.all(width * 0.04),

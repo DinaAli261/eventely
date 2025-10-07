@@ -2,6 +2,7 @@ import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
+typedef OnValidator =String? Function(String?)?;
 class CustomTextFormField extends StatelessWidget {
   Color borderSideColor;
   String? hintText;
@@ -10,6 +11,11 @@ class CustomTextFormField extends StatelessWidget {
   TextStyle? labelStyle;
   Widget? prefixIcon;
   Widget? suffixIcon;
+  OnValidator? validator;
+  TextInputType? keyboardType;
+  bool? obscureText;
+  String obscuringCharacter;
+  TextEditingController? controller;
 
   CustomTextFormField({
     super.key,
@@ -20,11 +26,21 @@ class CustomTextFormField extends StatelessWidget {
     this.labelStyle,
     this.prefixIcon,
     this.suffixIcon,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.obscureText = false,
+    this.obscuringCharacter = ".",
+    required this.controller
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      obscureText: obscureText!,
+      keyboardType: keyboardType,
+      obscuringCharacter: obscuringCharacter,
+      validator: validator,
       decoration: InputDecoration(
         enabledBorder: builtDecorationBorder(borderSideColor: borderSideColor),
         focusedBorder: builtDecorationBorder(borderSideColor: borderSideColor),
