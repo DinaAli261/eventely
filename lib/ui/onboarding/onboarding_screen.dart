@@ -1,3 +1,4 @@
+import 'package:evently/auth/register/register_screen.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
@@ -8,7 +9,6 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../providers/app_theme_provider.dart';
-import '../home/home_screen.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -23,7 +23,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   void _onIntroEnd(BuildContext context) {
     Navigator.of(
       context,
-    ).pushReplacement(MaterialPageRoute(builder: (_) => const HomeScreen()));
+    ).pushReplacement(MaterialPageRoute(builder: (_) => RegisterScreen()));
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {

@@ -4,4 +4,6 @@ class AppRoutes {
   static const profileRouteName = 'profile';
   static const firstScreenRouteName = 'first';
   static const loginScreenRouteName = 'login';
+  static const registerScreenRouteName = 'register';
+  static const resetPasswordRouteName = 'register';
 }
