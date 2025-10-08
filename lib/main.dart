@@ -1,4 +1,6 @@
 import 'package:evently/auth/login/login_screen.dart';
+import 'package:evently/auth/register/register_screen.dart';
+import 'package:evently/auth/reset_password/reset_password.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
@@ -37,7 +39,9 @@ class MyApp extends StatelessWidget {
           AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
           AppRoutes.profileRouteName: (context) => ProfileTab(),
           AppRoutes.firstScreenRouteName: (context) => FirstScreen(),
-          AppRoutes.loginScreenRouteName: (context) => LoginScreen()
+          AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
+          AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
+          AppRoutes.resetPasswordRouteName: (context) => ResetPassword()
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
