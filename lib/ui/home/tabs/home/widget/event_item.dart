@@ -35,7 +35,7 @@ class _EventItemState extends State<EventItem> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-              image: AssetImage(AppImages.meeting), fit: BoxFit.fill),
+              image: AssetImage(AppImages.gaming), fit: BoxFit.fill),
         ),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,11 +68,15 @@ class _EventItemState extends State<EventItem> {
                 ),
                 child: Row(
                   children: [
-                    Text("Meeting for Updating The Development Method ",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .headlineSmall,),
+                    Flexible(
+                      child: Text(
+                        "Meeting for Updating The Development Method ",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .headlineSmall,
+                        softWrap: true,),
+                    ),
                     SizedBox(width: width * 0.04,),
                     InkWell(
                         onTap: (() {

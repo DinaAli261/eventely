@@ -12,7 +12,8 @@ class AppTheme {
       textTheme: TextTheme(
         headlineLarge: AppTextStyles.offWhite20Bold,
           headlineMedium: AppTextStyles.offWhite16Medium,
-          headlineSmall: AppTextStyles.offWhite14Bold
+        headlineSmall: AppTextStyles.offWhite14Bold,
+        labelMedium: AppTextStyles.offWhite16Medium,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -41,7 +42,8 @@ class AppTheme {
     textTheme: TextTheme(
       headlineLarge: AppTextStyles.black20Bold,
         headlineMedium: AppTextStyles.blue16Medium,
-        headlineSmall: AppTextStyles.black14Bold
+      headlineSmall: AppTextStyles.black14Bold,
+      labelMedium: AppTextStyles.black16Medium,
     ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,

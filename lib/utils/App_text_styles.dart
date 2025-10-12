@@ -94,4 +94,9 @@ class AppTextStyles {
     color: AppColors.black,
     fontSize: 16,
   );
+  static final TextStyle blue22Regular = TextStyle(
+    fontWeight: FontWeight.w400,
+    color: AppColors.blue,
+    fontSize: 22,
+  );
 }

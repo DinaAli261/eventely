@@ -9,12 +9,18 @@ import 'package:flutter/material.dart';
 
 import '../../ui/first_screen/select_widget.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
-
-
-  LoginScreen({super.key});
 
   final formKey = GlobalKey<FormState>();
 
@@ -37,28 +43,30 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomTextFormField(
-                      prefixIcon: Icon(Icons.email, color: AppColors.grey),
+                      prefixIcon: Icons.email,
                       controller: emailController,
                       hintText: AppLocalizations.of(context)!.email,
                       validator: (text) {
                         if (text == null || text
                             .trim()
                             .isEmpty) {
-                          return "please Enter Email";
+                          return AppLocalizations.of(context)!
+                              .please_enter_email;
                         }
                         final bool emailValid =
                         RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(text);
                         if (!emailValid) {
-                          return "please Enter A Valid Email";
+                          return AppLocalizations.of(context)!
+                              .please_enter_a_valid_email;
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: height * 0.02),
                     CustomTextFormField(
-                        prefixIcon: Icon(Icons.lock, color: AppColors.grey),
+                        prefixIcon: Icons.lock,
                         controller: passwordController,
                         hintText: AppLocalizations.of(context)!.password,
                         keyboardType: TextInputType.number,
@@ -68,7 +76,8 @@ class LoginScreen extends StatelessWidget {
                           if (text == null || text
                               .trim()
                               .isEmpty) {
-                            return "please Enter Password";
+                            return AppLocalizations.of(context)!
+                                .please_enter_password;
                           }
                           return null;
                         }
@@ -81,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                       child: Align(
                         alignment: AlignmentGeometry.centerRight,
                         child: Text(
-                          AppLocalizations.of(context)!.forgetPassword,
+                          "${AppLocalizations.of(context)!.forget_password} ?",
                           style: AppTextStyles.blue16ItalicBold.copyWith(
                             decoration: TextDecoration.underline,
                             decorationColor: AppColors.blue,
@@ -97,8 +106,11 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.doNotHaveAccount,
-                          style: AppTextStyles.black16Medium,
+                          AppLocalizations.of(context)!.do_not_have_account,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .labelMedium,
                         ),
                         TextButton(
                           onPressed: () {
@@ -106,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                                 AppRoutes.registerScreenRouteName);
                           },
                           child: Text(
-                            AppLocalizations.of(context)!.createAccount,
+                            AppLocalizations.of(context)!.create_account,
                             style: AppTextStyles.blue16ItalicBold.copyWith(
                               decoration: TextDecoration.underline,
                               decorationColor: AppColors.blue,
@@ -142,12 +154,11 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: height * 0.02),
                     CustomElevatedButton(
                       onPressed: () {},
-                      text: AppLocalizations.of(context)!.loginWithGoogle,
+                      text: AppLocalizations.of(context)!.login_with_google,
                       backgroundColor: AppColors.transparent,
                       borderColor: AppColors.blue,
                       haveIcon: true,
                       textStyle: AppTextStyles.blue20Medium,
-                      icon: Image.asset(AppImages.google),
                       isCenter: true,
                     ),
                     SizedBox(height: height * 0.02),
@@ -169,6 +180,7 @@ class LoginScreen extends StatelessWidget {
   void login() {
     if (formKey.currentState?.validate() == true) {
       //todo:login
+      Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreenRouteName);
     }
   }
 }

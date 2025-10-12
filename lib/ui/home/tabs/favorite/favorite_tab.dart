@@ -29,7 +29,7 @@ class FavoriteTab extends StatelessWidget {
             child: CustomTextFormField(
               borderSideColor: AppColors.blue,
               controller: searchController,
-              prefixIcon: Icon(Icons.search, color: AppColors.blue),
+              prefixIcon: Icons.search,
               hintText: AppLocalizations.of(context)!.searchForEvent,
               hintStyle: AppTextStyles.blue14Bold,
 

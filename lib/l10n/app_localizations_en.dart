@@ -122,20 +122,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
-  String get forgetPassword => 'Forget Password ?';
+  String get forget_password => 'Forget Password';
 
   @override
   String get login => 'Login';
 
   @override
-  String get doNotHaveAccount => 'Don\'t Have Account ?';
+  String get do_not_have_account => 'Don\'t Have Account ?';
 
   @override
-  String get createAccount => 'Create Account';
+  String get create_account => 'Create Account';
 
   @override
   String get or => 'Or';
 
   @override
-  String get loginWithGoogle => 'Login With Google';
+  String get login_with_google => 'Login With Google';
+
+  @override
+  String get reset_password => 'Reset Password';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get re_password => 'Re Password';
+
+  @override
+  String get already_have_account => 'Already Have Account';
+
+  @override
+  String get please_enter_name => 'Please Enter Name';
+
+  @override
+  String get please_enter_password => 'Please Enter Password';
+
+  @override
+  String get password_does_not_match => 'Password Doesn\'t Match';
+
+  @override
+  String get please_enter_email => 'Please Enter Email';
+
+  @override
+  String get please_enter_a_valid_email => 'Please Enter A Valid Email';
 }

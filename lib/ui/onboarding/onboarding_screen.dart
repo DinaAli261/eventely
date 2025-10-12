@@ -1,4 +1,4 @@
-import 'package:evently/auth/register/register_screen.dart';
+import 'package:evently/auth/login/login_screen.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
@@ -23,7 +23,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   void _onIntroEnd(BuildContext context) {
     Navigator.of(
       context,
-    ).pushReplacement(MaterialPageRoute(builder: (_) => RegisterScreen()));
+    ).pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {

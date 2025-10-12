@@ -9,13 +9,22 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_images.dart';
 import '../../utils/app_routes.dart';
 
-class RegisterScreen extends StatelessWidget {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController rePasswordController = TextEditingController();
+class RegisterScreen extends StatefulWidget {
 
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  TextEditingController rePasswordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -26,8 +35,12 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparent,
-        title: Text("Register"),
+        title: Text(AppLocalizations.of(context)!.register,
+          style: AppTextStyles.blue22Regular,),
         centerTitle: true,
+        iconTheme: IconThemeData(
+            color: AppColors.blue
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -44,37 +57,38 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.lock, color: AppColors.grey),
+                    prefixIcon: Icons.lock,
                     controller: nameController,
-                    hintText: "Name",
+                    hintText: AppLocalizations.of(context)!.name,
                     validator: (text) {
                       if (text == null || text.trim().isEmpty) {
-                        return "please Enter Name";
+                        return AppLocalizations.of(context)!.please_enter_name;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: height * 0.02),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.email, color: AppColors.grey),
+                    prefixIcon: Icons.email,
                     controller: emailController,
                     hintText: AppLocalizations.of(context)!.email,
                     validator: (text) {
                       if (text == null || text.trim().isEmpty) {
-                        return "please Enter Email";
+                        return AppLocalizations.of(context)!.please_enter_email;
                       }
                       final bool emailValid = RegExp(
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                       ).hasMatch(text);
                       if (!emailValid) {
-                        return "please Enter A Valid Email";
+                        return AppLocalizations.of(context)!
+                            .please_enter_a_valid_email;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: height * 0.02),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.lock, color: AppColors.grey),
+                    prefixIcon: Icons.lock,
                     controller: passwordController,
                     hintText: AppLocalizations.of(context)!.password,
                     keyboardType: TextInputType.number,
@@ -82,46 +96,51 @@ class RegisterScreen extends StatelessWidget {
                     obscureText: true,
                     validator: (text) {
                       if (text == null || text.trim().isEmpty) {
-                        return "please Enter Password";
+                        return AppLocalizations.of(context)!
+                            .please_enter_password;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: height * 0.02),
                   CustomTextFormField(
-                    prefixIcon: Icon(Icons.lock, color: AppColors.grey),
+                    prefixIcon: Icons.lock,
                     controller: rePasswordController,
-                    hintText: "re Password",
+                    hintText: AppLocalizations.of(context)!.re_password,
                     keyboardType: TextInputType.number,
                     obscuringCharacter: "*",
                     obscureText: true,
                     validator: (text) {
                       if (text == null || text.trim().isEmpty) {
-                        return "please Enter Password";
+                        return AppLocalizations.of(context)!
+                            .please_enter_password;
                       }
-                      if (text == passwordController.text) {
-                        return "password doesn't match ";
+                      if (text != passwordController.text) {
+                        return AppLocalizations.of(context)!
+                            .password_does_not_match;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: height * 0.02),
                   CustomElevatedButton(
-                    onPressed: login,
-                    text: AppLocalizations.of(context)!.createAccount,
+                    onPressed: register,
+                    text: AppLocalizations.of(context)!.create_account,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already Have Account ?",
-                        style: AppTextStyles.black16Medium,
+                        "${AppLocalizations.of(context)!
+                            .already_have_account} ?",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .labelMedium,
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(
-                            context,
-                          ).pushNamed(AppRoutes.registerScreenRouteName);
+                          Navigator.pop(context);
                         },
                         child: Text(
                           AppLocalizations.of(context)!.login,
@@ -147,9 +166,10 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  void login() {
+  void register() {
     if (formKey.currentState?.validate() == true) {
       //todo:login
+      Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreenRouteName);
     }
   }
 }

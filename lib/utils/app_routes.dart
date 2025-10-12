@@ -5,5 +5,5 @@ class AppRoutes {
   static const firstScreenRouteName = 'first';
   static const loginScreenRouteName = 'login';
   static const registerScreenRouteName = 'register';
-  static const resetPasswordRouteName = 'register';
+  static const resetPasswordRouteName = 'reset';
 }
