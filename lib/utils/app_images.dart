@@ -10,10 +10,7 @@ class AppImages {
   static final String selectedLove = 'assets/images/selectedLove.png';
   static final String eg = 'assets/images/eg.png';
   static final String us = 'assets/images/us.png';
-  static final String sport = 'assets/images/sport.png';
-  static final String birthday = 'assets/images/birthday.png';
-  static final String meeting = 'assets/images/meeting.png';
-  static final String logo = "assets/images/logo_evently.png";
-  static final String google = 'assets/images/google.png';
-  static final String resetPassword = 'assets/images/reset_password.png';
+  static final String gaming = 'assets/images/gaming.png';
+  static final String logo = 'assets/images/logo_evently.png';
+  static final String reset = 'assets/images/reset_password.png';
 }

@@ -150,7 +150,7 @@ class _HomeTabState extends State<HomeTab> {
                 top: height * 0.019
             ),
             height: 0.64 * height,
-            child: Expanded(child: ListView.separated(
+            child: ListView.separated(
               itemBuilder: (context, index) {
                 return EventItem();
               },
@@ -158,7 +158,6 @@ class _HomeTabState extends State<HomeTab> {
               separatorBuilder: (context, index) {
                 return SizedBox(height: height * 0.019,);
               },
-            )
             ),
           )
       ),

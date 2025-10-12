@@ -30,9 +30,9 @@ class _FirstScreenState extends State<FirstScreen> {
         .width;
     var themeProvider = Provider.of<AppThemeProvider>(context);
     final isDark = themeProvider.appTheme == ThemeMode.dark;
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: EdgeInsets.all(width * 0.04),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
