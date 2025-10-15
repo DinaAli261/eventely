@@ -9,10 +9,11 @@ class CustomElevatedButton extends StatelessWidget {
   final Color backgroundColor;
   final TextStyle? textStyle;
   final Color borderColor;
-
   final bool haveIcon;
   final bool isCenter;
   Widget? icon;
+  Widget? items;
+  double padding;
 
   CustomElevatedButton({
     super.key,
@@ -24,6 +25,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.haveIcon = false,
     this.icon,
     this.isCenter = false,
+    this.items,
+    this.padding = 0.04,
   });
 
   @override
@@ -33,7 +36,7 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        padding: EdgeInsets.all(width * 0.04),
+        padding: EdgeInsets.all(width * padding),
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
@@ -49,6 +52,8 @@ class CustomElevatedButton extends StatelessWidget {
                 icon ?? SizedBox(),
                 SizedBox(width: width * 0.02),
                 Text(text, style: textStyle ?? AppTextStyles.offWhite20Medium),
+                Spacer(),
+                items ?? SizedBox(),
               ],
             )
           : Text(text, style: textStyle ?? AppTextStyles.offWhite20Medium),

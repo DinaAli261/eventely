@@ -168,4 +168,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_enter_a_valid_email => 'من فضلك ادخل ايميل صالح';
+
+  @override
+  String get create_event => 'انشاء حدث';
+
+  @override
+  String get title => 'العنوان';
+
+  @override
+  String get event_title => 'عنوان الحدث';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get event_description => 'وصف الحدث';
+
+  @override
+  String get event_date => 'تاريخ الحدث';
+
+  @override
+  String get choose_date => 'اختار التاريخ';
+
+  @override
+  String get event_time => 'وقت الحدث';
+
+  @override
+  String get choose_time => 'اختار الوقت';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get choose_event_location => 'اختار موقع الحدث';
+
+  @override
+  String get add_event => 'اضافه حدث';
+
+  @override
+  String get please_enter_title => 'من فضلك ادخل العنوان';
+
+  @override
+  String get please_enter_description => 'من فضلك ادخل الوصف';
+
+  @override
+  String get please_choose_date => 'من فضلك اختار التاريخ';
+
+  @override
+  String get please_choose_time => 'من فضلك اختار الوقت';
 }

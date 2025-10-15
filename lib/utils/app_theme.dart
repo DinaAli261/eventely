@@ -4,16 +4,24 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
+      appBarTheme: AppBarThemeData(
+        iconTheme: IconThemeData(
+            color: AppColors.blue
+        ),
+      ),
       scaffoldBackgroundColor: AppColors.darkBlue,
       primaryColor: AppColors.darkBlue,
       focusColor: AppColors.blue,
       cardColor: AppColors.darkBlue,
       secondaryHeaderColor: AppColors.offWhite,
+      canvasColor: AppColors.darkBlue,
+      disabledColor: AppColors.offWhite,
       textTheme: TextTheme(
         headlineLarge: AppTextStyles.offWhite20Bold,
           headlineMedium: AppTextStyles.offWhite16Medium,
         headlineSmall: AppTextStyles.offWhite14Bold,
         labelMedium: AppTextStyles.offWhite16Medium,
+        labelSmall: AppTextStyles.darkBlue16Medium,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -34,16 +42,24 @@ class AppTheme {
       )
   );
   static ThemeData lightTheme = ThemeData(
+      appBarTheme: AppBarThemeData(
+        iconTheme: IconThemeData(
+            color: AppColors.blue
+        ),
+      ),
     scaffoldBackgroundColor: AppColors.white,
+      canvasColor: AppColors.offWhite,
       primaryColor: AppColors.blue,
       cardColor: AppColors.white,
       secondaryHeaderColor: AppColors.blue,
       focusColor: AppColors.offWhite,
+      disabledColor: AppColors.black,
     textTheme: TextTheme(
       headlineLarge: AppTextStyles.black20Bold,
         headlineMedium: AppTextStyles.blue16Medium,
       headlineSmall: AppTextStyles.black14Bold,
       labelMedium: AppTextStyles.black16Medium,
+      labelSmall: AppTextStyles.offWhite16Medium,
     ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,

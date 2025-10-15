@@ -53,5 +53,21 @@
 "please_enter_password":"من فضلك ادخل كلمة المرور",
 "password_does_not_match":"كلمة المرور غير متطابقه",
 "please_enter_email":"من فضلك ادخل الايميل",
-"please_enter_a_valid_email":"من فضلك ادخل ايميل صالح"
+"please_enter_a_valid_email":"من فضلك ادخل ايميل صالح",
+"create_event":"انشاء حدث",
+"title":"العنوان",
+"event_title":"عنوان الحدث",
+"description":"الوصف",
+"event_description":"وصف الحدث",
+"event_date":"تاريخ الحدث",
+"choose_date":"اختار التاريخ",
+"event_time":"وقت الحدث",
+"choose_time":"اختار الوقت",
+"location":"الموقع",
+"choose_event_location":"اختار موقع الحدث",
+"add_event":"اضافه حدث",
+"please_enter_title":"من فضلك ادخل العنوان",
+"please_enter_description":"من فضلك ادخل الوصف",
+"please_choose_date":"من فضلك اختار التاريخ",
+"please_choose_time":"من فضلك اختار الوقت"
 }
