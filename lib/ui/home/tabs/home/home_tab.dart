@@ -139,6 +139,22 @@ class _HomeTabState extends State<HomeTab> {
                                 eventName: eventName,
                                 isSelected: (selectedIndex ==
                                     eventNameList.indexOf(eventName)),
+                                selectedBgColor: Theme
+                                    .of(context)
+                                    .focusColor,
+                                borderColor: Theme
+                                    .of(context)
+                                    .focusColor,
+                                selectedTextStyle: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headlineMedium,
+                                unSelectedTextStyle: AppTextStyles
+                                    .offWhite16Medium,
+                                selectedIconColor: Theme
+                                    .of(context)
+                                    .secondaryHeaderColor,
+                                unSelectedIconColor: AppColors.offWhite,
                               )
                       ).toList()
                   ))

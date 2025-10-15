@@ -5,6 +5,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/first_screen/first_screen.dart';
+import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/onboarding/onboarding_screen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginScreenRouteName,
+      initialRoute: AppRoutes.firstScreenRouteName,
         routes: {
           AppRoutes.onboardingRouteName: (context) => OnBoardingScreen(),
           AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.firstScreenRouteName: (context) => FirstScreen(),
           AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
           AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
-          AppRoutes.resetPasswordRouteName: (context) => ResetPassword()
+          AppRoutes.resetPasswordRouteName: (context) => ResetPassword(),
+          AppRoutes.addEventRouteName: (context) => AddEvent()
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,

@@ -38,9 +38,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: Text(AppLocalizations.of(context)!.register,
           style: AppTextStyles.blue22Regular,),
         centerTitle: true,
-        iconTheme: IconThemeData(
-            color: AppColors.blue
-        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -169,7 +166,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void register() {
     if (formKey.currentState?.validate() == true) {
       //todo:login
-      Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreenRouteName);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        AppRoutes.homeScreenRouteName,
+            (route) => false,);
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:evently/ui/home/tabs/map/map_tab.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 
@@ -54,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 unselectedIcon: AppImages.unselectedProfile),
           ]
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {},
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.of(context).pushNamed(AppRoutes.addEventRouteName);
+      },
         child: Icon(Icons.add, color: AppColors.white, size: 40,),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

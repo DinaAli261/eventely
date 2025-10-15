@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   bool? obscureText;
   String obscuringCharacter;
   TextEditingController? controller;
+  int? maxLines;
 
   CustomTextFormField({
     super.key,
@@ -34,7 +35,8 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.obscuringCharacter = ".",
-    required this.controller
+    required this.controller,
+    this.maxLines = 1,
   });
 
   @override
@@ -42,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     bool isDark = themeProvider.appTheme == ThemeMode.dark;
     return TextFormField(
+      maxLines: maxLines,
       style: TextStyle(
           color: (isDark) ? AppColors.offWhite : AppColors.black
       ),
@@ -69,7 +72,8 @@ class CustomTextFormField extends StatelessWidget {
                 .grey16Medium),
         labelText: labelText,
         labelStyle: labelStyle ?? AppTextStyles.grey16Medium,
-        prefixIcon: Icon(prefixIcon, color: (borderSideColor == AppColors.red)
+        prefixIcon: (prefixIcon == null) ? null : Icon(
+            prefixIcon, color: (borderSideColor == AppColors.red)
             ? AppColors.offWhite
             : (hintStyle == AppTextStyles.blue14Bold)
             ? AppColors.blue

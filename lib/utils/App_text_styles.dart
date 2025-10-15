@@ -99,4 +99,15 @@ class AppTextStyles {
     color: AppColors.blue,
     fontSize: 22,
   );
+  static final TextStyle darkBlue16Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.darkBlue,
+    fontSize: 16,
+  );
+  static final TextStyle red12Regular = TextStyle(
+    fontWeight: FontWeight.w400,
+    height: 1.2,
+    color: AppColors.red,
+    fontSize: 12,
+  );
 }

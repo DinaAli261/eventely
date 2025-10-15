@@ -18,9 +18,6 @@ class ResetPassword extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.forget_password,
           style: AppTextStyles.blue22Regular,),
         centerTitle: true,
-        iconTheme: IconThemeData(
-            color: AppColors.blue
-        ),
       ),
 
       body: Padding(

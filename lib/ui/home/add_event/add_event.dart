@@ -1,0 +1,280 @@
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/ui/home/add_event/widget/date_or_time_widget.dart';
+import 'package:evently/ui/home/widget/custom_elevated_button.dart';
+import 'package:evently/ui/home/widget/custom_text_form_field.dart';
+import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_images.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../../utils/App_text_styles.dart';
+import '../tabs/home/widget/event_tab_item.dart';
+
+class AddEvent extends StatefulWidget {
+  const AddEvent({super.key});
+
+  @override
+  State<AddEvent> createState() => _AddEventState();
+}
+
+class _AddEventState extends State<AddEvent> {
+  int selectedIndex = 0;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
+  bool isSelectedDate = true;
+  bool isSelectedTime = true;
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    List<String> eventNameList = [
+      AppLocalizations.of(context)!.sport,
+      AppLocalizations.of(context)!.birthday,
+      AppLocalizations.of(context)!.meeting,
+      AppLocalizations.of(context)!.gaming,
+      AppLocalizations.of(context)!.workshop,
+      AppLocalizations.of(context)!.bookClub,
+      AppLocalizations.of(context)!.exhibition,
+      AppLocalizations.of(context)!.holiday,
+      AppLocalizations.of(context)!.eating,
+    ];
+    List<IconData> eventIconsList = [
+      Icons.directions_bike_outlined,
+      Icons.cake_outlined,
+      Icons.groups_outlined,
+      Icons.sports_esports_outlined,
+      Icons.computer,
+      Icons.menu_book_outlined,
+      Icons.palette,
+      Icons.beach_access_outlined,
+      Icons.fastfood_outlined,
+    ];
+    List<String> eventImages = [
+      AppImages.sport,
+      AppImages.birthday,
+      AppImages.meeting,
+      AppImages.gaming,
+      AppImages.workshop,
+      AppImages.bookClub,
+      AppImages.exhibition,
+      AppImages.holiday,
+      AppImages.eating,
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.create_event,
+          style: AppTextStyles.blue22Regular,
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.transparent,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.04,
+            vertical: height * 0.02,
+          ),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(16),
+                  child: Image.asset(eventImages[selectedIndex]),
+                ),
+                DefaultTabController(
+                  length: eventNameList.length,
+                  child: TabBar(
+                    onTap: (index) {
+                      selectedIndex = index;
+                      setState(() {});
+                    },
+                    labelPadding: EdgeInsetsDirectional.only(
+                      start: 0.025 * width,
+                    ),
+                    indicatorColor: AppColors.transparent,
+                    dividerColor: AppColors.transparent,
+                    tabAlignment: TabAlignment.start,
+                    isScrollable: true,
+                    tabs: eventNameList
+                        .map(
+                          (eventName) => EventTabItem(
+                            icon:
+                                eventIconsList[eventNameList.indexOf(
+                                  eventName,
+                                )],
+                            eventName: eventName,
+                            isSelected:
+                                (selectedIndex ==
+                                eventNameList.indexOf(eventName)),
+                            selectedBgColor: AppColors.blue,
+                            borderColor: AppColors.blue,
+                            selectedTextStyle: Theme.of(
+                              context,
+                            ).textTheme.labelSmall,
+                            unSelectedTextStyle: AppTextStyles.blue16Medium,
+                            selectedIconColor: Theme.of(context).canvasColor,
+                            unSelectedIconColor: AppColors.blue,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                Text(
+                  AppLocalizations.of(context)!.title,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                SizedBox(height: height * 0.02),
+                CustomTextFormField(
+                  controller: titleController,
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.please_enter_title;
+                    }
+                    return null;
+                  },
+                  prefixIcon: Icons.border_color_outlined,
+                  hintText: AppLocalizations.of(context)!.event_title,
+                ),
+                SizedBox(height: height * 0.02),
+                Text(
+                  AppLocalizations.of(context)!.description,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                SizedBox(height: height * 0.02),
+                CustomTextFormField(
+                  controller: descriptionController,
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
+                      return AppLocalizations.of(
+                        context,
+                      )!.please_enter_description;
+                    }
+                    return null;
+                  },
+                  maxLines: 3,
+                  hintText: AppLocalizations.of(context)!.event_description,
+                ),
+                DateOrTimeWidget(
+                  iconName: Icons.calendar_month_outlined,
+                  rowText: AppLocalizations.of(context)!.event_date,
+                  rowTextButton: (selectedDate == null)
+                      ? AppLocalizations.of(context)!.choose_date
+                      :
+                        //"${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"
+                        DateFormat('dd/MM/yyyy').format(selectedDate!),
+                  onPressed: onChooseDate,
+                ),
+                (isSelectedDate)
+                    ? SizedBox()
+                    : Align(
+                        alignment: AlignmentGeometry.directional(1, 300),
+                        child: Text(
+                          AppLocalizations.of(context)!.please_choose_date,
+                          style: AppTextStyles.red12Regular,
+                        ),
+                      ),
+
+                DateOrTimeWidget(
+                  iconName: Icons.access_time,
+                  rowText: AppLocalizations.of(context)!.event_time,
+                  rowTextButton: (selectedTime == null)
+                      ? AppLocalizations.of(context)!.choose_time
+                      : selectedTime!.format(context),
+                  onPressed: onChooseTime,
+                ),
+                (isSelectedTime)
+                    ? SizedBox()
+                    : Align(
+                        alignment: AlignmentGeometry.directional(1, 300),
+                        child: Text(
+                          AppLocalizations.of(context)!.please_choose_time,
+                          style: AppTextStyles.red12Regular,
+                        ),
+                      ),
+                Text(
+                  AppLocalizations.of(context)!.location,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                SizedBox(height: height * 0.02),
+                CustomElevatedButton(
+                  onPressed: () {},
+                  text: AppLocalizations.of(context)!.choose_event_location,
+                  borderColor: AppColors.blue,
+                  backgroundColor: AppColors.transparent,
+                  haveIcon: true,
+                  textStyle: AppTextStyles.blue16Medium,
+                  padding: 0.02,
+                  items: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: AppColors.blue,
+                      ),
+                    ],
+                  ),
+                  icon: Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      color: AppColors.blue,
+                      borderRadius: BorderRadiusGeometry.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.my_location,
+                      color: Theme.of(context).canvasColor,
+                    ),
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                CustomElevatedButton(
+                  onPressed: addEvent,
+                  text: AppLocalizations.of(context)!.add_event,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> onChooseDate() async {
+    var chooseDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
+    );
+    selectedDate = chooseDate;
+    setState(() {});
+  }
+
+  Future<void> onChooseTime() async {
+    var chooseTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    selectedTime = chooseTime;
+    setState(() {});
+  }
+
+  void addEvent() {
+    isSelectedDate = (selectedDate == null) ? false : true;
+    isSelectedTime = (selectedDate == null) ? false : true;
+    setState(() {});
+    if (formKey.currentState?.validate() == true &&
+        selectedTime != null &&
+        selectedDate != null) {
+      //todo: add event in fireStore
+    }
+  }
+}
