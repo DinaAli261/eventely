@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/auth/login/login_screen.dart';
 import 'package:evently/auth/register/register_screen.dart';
 import 'package:evently/auth/reset_password/reset_password.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
+import 'package:evently/providers/event_list_provider.dart';
 import 'package:evently/ui/first_screen/first_screen.dart';
 import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/home_screen.dart';
@@ -11,13 +13,24 @@ import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/onboarding/onboarding_screen.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-void main() {
+
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppLanguageProvider(),),
         ChangeNotifierProvider(create: (context) => AppThemeProvider(),),
+        ChangeNotifierProvider(create: (context) => EventListProvider(),),
+
       ],
       child: const MyApp()));
 }

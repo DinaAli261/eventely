@@ -216,4 +216,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_choose_time => 'Please Choose Time';
+
+  @override
+  String get no_event_found => 'No Event Found';
 }

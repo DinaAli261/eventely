@@ -69,5 +69,6 @@
 "please_enter_title":"من فضلك ادخل العنوان",
 "please_enter_description":"من فضلك ادخل الوصف",
 "please_choose_date":"من فضلك اختار التاريخ",
-"please_choose_time":"من فضلك اختار الوقت"
+"please_choose_time":"من فضلك اختار الوقت",
+"no_event_found":"لم يتم العثور على حدث"
 }

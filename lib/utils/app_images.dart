@@ -21,4 +21,5 @@ class AppImages {
   static final String holiday = 'assets/images/holiday.png';
   static final String meeting = 'assets/images/meeting.png';
   static final String sport = 'assets/images/sport.png';
+  static final String google = 'assets/images/google.png';
 }

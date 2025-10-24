@@ -505,6 +505,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please Choose Time'**
   String get please_choose_time;
+
+  /// No description provided for @no_event_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No Event Found'**
+  String get no_event_found;
 }
 
 class _AppLocalizationsDelegate

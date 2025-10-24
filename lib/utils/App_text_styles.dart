@@ -110,4 +110,9 @@ class AppTextStyles {
     color: AppColors.red,
     fontSize: 12,
   );
+  static final TextStyle darkBlue20bold = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: AppColors.darkBlue,
+    fontSize: 20,
+  );
 }

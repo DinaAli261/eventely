@@ -1,12 +1,17 @@
+import 'package:evently/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/model/event.dart';
 import 'package:evently/ui/home/add_event/widget/date_or_time_widget.dart';
 import 'package:evently/ui/home/widget/custom_elevated_button.dart';
 import 'package:evently/ui/home/widget/custom_text_form_field.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/event_list_provider.dart';
 import '../../../utils/App_text_styles.dart';
 import '../tabs/home/widget/event_tab_item.dart';
 
@@ -19,6 +24,8 @@ class AddEvent extends StatefulWidget {
 
 class _AddEventState extends State<AddEvent> {
   int selectedIndex = 0;
+  String selectedEventImage = '';
+  String selectedEventName = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -26,11 +33,15 @@ class _AddEventState extends State<AddEvent> {
   TimeOfDay? selectedTime;
   bool isSelectedDate = true;
   bool isSelectedTime = true;
+  String formatTime = '';
+  late EventListProvider eventListProvider;
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    eventListProvider = Provider.of<EventListProvider>(context);
+
     List<String> eventNameList = [
       AppLocalizations.of(context)!.sport,
       AppLocalizations.of(context)!.birthday,
@@ -64,6 +75,8 @@ class _AddEventState extends State<AddEvent> {
       AppImages.holiday,
       AppImages.eating,
     ];
+    selectedEventImage = eventImages[selectedIndex];
+    selectedEventName = eventNameList[selectedIndex];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -90,9 +103,12 @@ class _AddEventState extends State<AddEvent> {
                 ),
                 DefaultTabController(
                   length: eventNameList.length,
+                  initialIndex: 0,
                   child: TabBar(
                     onTap: (index) {
                       selectedIndex = index;
+                      selectedEventImage = eventImages[index];
+                      selectedEventName = eventNameList[index];
                       setState(() {});
                     },
                     labelPadding: EdgeInsetsDirectional.only(
@@ -169,7 +185,7 @@ class _AddEventState extends State<AddEvent> {
                       ? AppLocalizations.of(context)!.choose_date
                       :
                         //"${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"
-                        DateFormat('dd/MM/yyyy').format(selectedDate!),
+                  formatTime = DateFormat('dd/MM/yyyy').format(selectedDate!),
                   onPressed: onChooseDate,
                 ),
                 (isSelectedDate)
@@ -264,6 +280,7 @@ class _AddEventState extends State<AddEvent> {
       initialTime: TimeOfDay.now(),
     );
     selectedTime = chooseTime;
+    formatTime = selectedTime!.format(context);
     setState(() {});
   }
 
@@ -275,6 +292,29 @@ class _AddEventState extends State<AddEvent> {
         selectedTime != null &&
         selectedDate != null) {
       //todo: add event in fireStore
+      Event event = Event(title: titleController.text,
+          description: descriptionController.text,
+          eventImage: selectedEventImage,
+          eventName: selectedEventName,
+          eventDateTime: selectedDate!,
+          eventTime: formatTime);
+      FirebaseUtils.addEventToFireStore(event).timeout(
+        Duration(seconds: 1), onTimeout: () {
+        Fluttertoast.showToast(
+            msg: "event added successfully",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: AppColors.blue,
+            textColor: Theme
+                .of(context)
+                .canvasColor,
+            fontSize: 16.0
+        );
+        eventListProvider.getAllEvents();
+        Navigator.pop(context);
+      }
+        ,);
     }
   }
 }
