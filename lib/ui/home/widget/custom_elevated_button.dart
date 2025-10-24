@@ -45,10 +45,8 @@ class CustomElevatedButton extends StatelessWidget {
       ),
       child: (haveIcon)
           ? Row(
-              mainAxisAlignment: (isCenter)
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
               children: [
+                (isCenter) ? SizedBox(width: 60) : SizedBox(),
                 icon ?? SizedBox(),
                 SizedBox(width: width * 0.02),
                 Text(text, style: textStyle ?? AppTextStyles.offWhite20Medium),

@@ -216,4 +216,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_choose_time => 'من فضلك اختار الوقت';
+
+  @override
+  String get no_event_found => 'لم يتم العثور على حدث';
 }

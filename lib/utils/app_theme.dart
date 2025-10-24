@@ -22,6 +22,7 @@ class AppTheme {
         headlineSmall: AppTextStyles.offWhite14Bold,
         labelMedium: AppTextStyles.offWhite16Medium,
         labelSmall: AppTextStyles.darkBlue16Medium,
+          titleSmall: AppTextStyles.darkBlue20bold
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
@@ -60,6 +61,7 @@ class AppTheme {
       headlineSmall: AppTextStyles.black14Bold,
       labelMedium: AppTextStyles.black16Medium,
       labelSmall: AppTextStyles.offWhite16Medium,
+        titleSmall: AppTextStyles.blue20Bold
     ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,

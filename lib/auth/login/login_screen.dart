@@ -155,6 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomElevatedButton(
                       onPressed: () {},
                       text: AppLocalizations.of(context)!.login_with_google,
+                      icon: Image.asset(AppImages.google),
                       backgroundColor: AppColors.transparent,
                       borderColor: AppColors.blue,
                       haveIcon: true,

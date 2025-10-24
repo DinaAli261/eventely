@@ -4,8 +4,6 @@ import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../home/widget/event_item.dart';
-
 class FavoriteTab extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
 
@@ -39,7 +37,7 @@ class FavoriteTab extends StatelessWidget {
             height: 0.756 * height,
             child: Expanded(child: ListView.separated(
               itemBuilder: (context, index) {
-                return EventItem();
+                return Container();
               },
               itemCount: 20,
               separatorBuilder: (context, index) {

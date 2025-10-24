@@ -1,10 +1,13 @@
+import 'package:evently/model/event.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
-import 'package:evently/utils/app_images.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatefulWidget {
-  EventItem({super.key});
+  final Event event;
+
+  EventItem({super.key, required this.event});
 
   bool isFavorite = false;
 
@@ -35,7 +38,7 @@ class _EventItemState extends State<EventItem> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-              image: AssetImage(AppImages.gaming), fit: BoxFit.fill),
+              image: AssetImage(widget.event.eventImage), fit: BoxFit.fill),
         ),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,8 +55,10 @@ class _EventItemState extends State<EventItem> {
                 ),
                 child: Column(
                   children: [
-                    Text("21", style: AppTextStyles.blue14Bold),
-                    Text("Nov", style: AppTextStyles.blue14Bold),
+                    Text(widget.event.eventDateTime.day.toString(),
+                        style: AppTextStyles.blue14Bold),
+                    Text(DateFormat('MMM').format(widget.event.eventDateTime),
+                        style: AppTextStyles.blue14Bold),
                   ],
                 ),
               ),
@@ -67,24 +72,25 @@ class _EventItemState extends State<EventItem> {
                         .cardColor
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       child: Text(
-                        "Meeting for Updating The Development Method ",
+                        widget.event.title,
                         style: Theme
                             .of(context)
                             .textTheme
                             .headlineSmall,
-                        softWrap: true,),
+                        softWrap: true,
+                        maxLines: 2,),
                     ),
-                    SizedBox(width: width * 0.04,),
                     InkWell(
                         onTap: (() {
                           widget.isFavorite = !widget.isFavorite;
                           setState(() {});
                         }),
                         child: Icon((widget.isFavorite) ? Icons.favorite : Icons
-                            .favorite_border_outlined, color: AppColors.blue,))
+                            .favorite_border_outlined, color: AppColors.blue,)),
                   ],
                 ),
               ),
