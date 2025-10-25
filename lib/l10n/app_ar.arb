@@ -70,5 +70,8 @@
 "please_enter_description":"من فضلك ادخل الوصف",
 "please_choose_date":"من فضلك اختار التاريخ",
 "please_choose_time":"من فضلك اختار الوقت",
-"no_event_found":"لم يتم العثور على حدث"
+"no_event_found":"لم يتم العثور على حدث",
+"event_added_successfully":"تم اضافه الحدث بنجاح",
+"event_updated_successfully":"تم تعديل الحدث بنجاح",
+"no_favorite_event_found":"لم يتم العثور على حدث مفضل"
 }

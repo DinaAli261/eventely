@@ -6,8 +6,8 @@ import 'package:evently/ui/home/widget/custom_elevated_button.dart';
 import 'package:evently/ui/home/widget/custom_text_form_field.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
+import 'package:evently/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -300,17 +300,11 @@ class _AddEventState extends State<AddEvent> {
           eventTime: formatTime);
       FirebaseUtils.addEventToFireStore(event).timeout(
         Duration(seconds: 1), onTimeout: () {
-        Fluttertoast.showToast(
-            msg: "event added successfully",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: AppColors.blue,
-            textColor: Theme
+        ToastUtils.showToastMsg(
+            msg: AppLocalizations.of(context)!.event_added_successfully,
+            color: Theme
                 .of(context)
-                .canvasColor,
-            fontSize: 16.0
-        );
+                .canvasColor);
         eventListProvider.getAllEvents();
         Navigator.pop(context);
       }

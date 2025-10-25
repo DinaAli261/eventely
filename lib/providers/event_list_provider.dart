@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../firebase_utils.dart';
 import '../l10n/app_localizations.dart';
 import '../model/event.dart';
-
 class EventListProvider extends ChangeNotifier {
   int selectedIndex = 0;
   List<Event> eventsList = [];
   List<Event> filterEventList = [];
   List<String> eventNameList = [];
+  List<Event> favoriteList = [];
 
   List<String> getEventNameList(BuildContext context) {
     return eventNameList = [
@@ -44,7 +45,7 @@ class EventListProvider extends ChangeNotifier {
     //getting all events
     QuerySnapshot<Event> querySnapshot =
         await FirebaseUtils.getEventCollection().get();
-    querySnapshot.docs.map((doc) {
+    eventsList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
     //filtering
@@ -61,5 +62,38 @@ class EventListProvider extends ChangeNotifier {
   void changeSelectedIndex(int newSelectedIndex) {
     selectedIndex = newSelectedIndex;
     selectedIndex == 0 ? getAllEvents() : getFilterEvents();
+  }
+
+  void getALLFavoriteEvents() async {
+    QuerySnapshot<Event> querySnapshot =
+        await FirebaseUtils.getEventCollection().get();
+    eventsList = querySnapshot.docs.map((doc) {
+      return doc.data();
+    }).toList();
+    favoriteList = eventsList.where((event) {
+      return event.isFavorite == true;
+    }).toList();
+    favoriteList.sort((event1, event2) {
+      return event1.eventDateTime.compareTo(event2.eventDateTime);
+    });
+    notifyListeners();
+  }
+
+  void updateIsFavoriteEvent(Event event, BuildContext context) {
+    FirebaseUtils.getEventCollection()
+        .doc(event.id)
+        .update({'isFavorite': !event.isFavorite})
+        .timeout(
+          Duration(seconds: 1),
+          onTimeout: () {
+            ToastUtils.showToastMsg(
+              msg: AppLocalizations.of(context)!.event_updated_successfully,
+              color: Theme.of(context).canvasColor,
+            );
+          },
+        );
+    selectedIndex == 0 ? getAllEvents() : getFilterEvents();
+    getALLFavoriteEvents();
+    notifyListeners();
   }
 }

@@ -1,21 +1,15 @@
 import 'package:evently/model/event.dart';
+import 'package:evently/providers/event_list_provider.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-class EventItem extends StatefulWidget {
+class EventItem extends StatelessWidget {
   final Event event;
 
-  EventItem({super.key, required this.event});
-
-  bool isFavorite = false;
-
-  @override
-  State<EventItem> createState() => _EventItemState();
-}
-
-class _EventItemState extends State<EventItem> {
+  const EventItem({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery
@@ -26,7 +20,7 @@ class _EventItemState extends State<EventItem> {
         .of(context)
         .size
         .height;
-
+    var eventListProvider = Provider.of<EventListProvider>(context);
     return Container(
         margin: EdgeInsets.only(
           left: height * 0.019,
@@ -38,7 +32,7 @@ class _EventItemState extends State<EventItem> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-              image: AssetImage(widget.event.eventImage), fit: BoxFit.fill),
+              image: AssetImage(event.eventImage), fit: BoxFit.fill),
         ),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,9 +49,9 @@ class _EventItemState extends State<EventItem> {
                 ),
                 child: Column(
                   children: [
-                    Text(widget.event.eventDateTime.day.toString(),
+                    Text(event.eventDateTime.day.toString(),
                         style: AppTextStyles.blue14Bold),
-                    Text(DateFormat('MMM').format(widget.event.eventDateTime),
+                    Text(DateFormat('MMM').format(event.eventDateTime),
                         style: AppTextStyles.blue14Bold),
                   ],
                 ),
@@ -76,7 +70,7 @@ class _EventItemState extends State<EventItem> {
                   children: [
                     Flexible(
                       child: Text(
-                        widget.event.title,
+                        event.title,
                         style: Theme
                             .of(context)
                             .textTheme
@@ -86,10 +80,11 @@ class _EventItemState extends State<EventItem> {
                     ),
                     InkWell(
                         onTap: (() {
-                          widget.isFavorite = !widget.isFavorite;
-                          setState(() {});
+                          eventListProvider.updateIsFavoriteEvent(
+                              event, context);
+
                         }),
-                        child: Icon((widget.isFavorite) ? Icons.favorite : Icons
+                        child: Icon((event.isFavorite) ? Icons.favorite : Icons
                             .favorite_border_outlined, color: AppColors.blue,)),
                   ],
                 ),
