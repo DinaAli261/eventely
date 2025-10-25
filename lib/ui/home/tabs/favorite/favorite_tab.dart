@@ -1,20 +1,35 @@
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/providers/event_list_provider.dart';
+import 'package:evently/ui/home/tabs/home/widget/event_item.dart';
 import 'package:evently/ui/home/widget/custom_text_form_field.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FavoriteTab extends StatelessWidget {
+class FavoriteTab extends StatefulWidget {
+
+  const FavoriteTab({super.key});
+
+  @override
+  State<FavoriteTab> createState() => _FavoriteTabState();
+}
+
+class _FavoriteTabState extends State<FavoriteTab> {
   TextEditingController searchController = TextEditingController();
+  late EventListProvider eventListProvider;
 
-  FavoriteTab({super.key});
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      eventListProvider.getALLFavoriteEvents();
+    },);
+  }
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    eventListProvider = Provider.of<EventListProvider>(context);
     var height = MediaQuery
         .of(context)
         .size
@@ -35,11 +50,16 @@ class FavoriteTab extends StatelessWidget {
           ),
           SizedBox(
             height: 0.756 * height,
-            child: Expanded(child: ListView.separated(
+            child: Expanded(child:
+            eventListProvider.favoriteList.isEmpty ?
+            Center(child: Text(
+              AppLocalizations.of(context)!.no_favorite_event_found,
+              style: AppTextStyles.blue20Medium,))
+                : ListView.separated(
               itemBuilder: (context, index) {
-                return Container();
+                return EventItem(event: eventListProvider.favoriteList[index]);
               },
-              itemCount: 20,
+              itemCount: eventListProvider.favoriteList.length,
               separatorBuilder: (context, index) {
                 return SizedBox(height: height * 0.019,);
               },
