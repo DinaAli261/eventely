@@ -1,3 +1,5 @@
+import 'package:evently/utils/dialog_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
@@ -163,12 +165,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void register() {
+  void register() async {
     if (formKey.currentState?.validate() == true) {
-      //todo:login
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.homeScreenRouteName,
-            (route) => false,);
+      //todo:register
+      DialogUtils.showLoading(context: context);
+      try {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context,
+            title: "Success",
+            message: "Register Successfully.",
+            posActionName: 'ok',
+            posAction: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRoutes.homeScreenRouteName,
+                    (route) => false,);
+            });
+        print(credential.user?.uid ?? '');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+              context: context, message: "The password provided is too weak.",
+              title: "Error",
+              posActionName: 'ok');
+        } else if (e.code == 'email-already-in-use') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(context: context,
+              message: "The account already exists for that email.",
+              title: "Error",
+              posActionName: 'ok');
+        }
+      } catch (e) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context, message: e.toString(),
+            title: "Error",
+            posActionName: 'ok');
+      }
     }
   }
 }

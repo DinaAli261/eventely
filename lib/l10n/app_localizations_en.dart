@@ -228,4 +228,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_favorite_event_found => 'No Favorite Event Found';
+
+  @override
+  String get some_thing_went_wrong => 'Some Thing Went Wrong';
+
+  @override
+  String get event_details => 'Event Details';
+
+  @override
+  String get event_deleted_successfully => 'Event Deleted Successfully';
 }

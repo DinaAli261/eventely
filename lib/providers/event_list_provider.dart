@@ -96,4 +96,27 @@ class EventListProvider extends ChangeNotifier {
     getALLFavoriteEvents();
     notifyListeners();
   }
+
+  void deleteEvent(Event event, BuildContext context) async {
+    try {
+      await FirebaseUtils.getEventCollection().doc(event.id).delete();
+
+      eventsList.removeWhere((e) => e.id == event.id);
+      filterEventList.removeWhere((e) => e.id == event.id);
+      favoriteList.removeWhere((e) => e.id == event.id);
+
+      notifyListeners();
+
+      ToastUtils.showToastMsg(
+        msg: AppLocalizations.of(context)!.event_deleted_successfully,
+        color: Colors.green,
+      );
+    } catch (e) {
+      ToastUtils.showToastMsg(
+        msg: AppLocalizations.of(context)!.some_thing_went_wrong,
+        color: Colors.red,
+      );
+      print("Error deleting event: $e");
+    }
+  }
 }

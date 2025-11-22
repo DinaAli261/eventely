@@ -4,6 +4,7 @@ import 'package:evently/ui/home/tabs/home/widget/event_item.dart';
 import 'package:evently/ui/home/tabs/home/widget/event_tab_item.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_images.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -166,8 +167,16 @@ class _HomeTabState extends State<HomeTab> {
               style: AppTextStyles.blue20Medium,))
                 : ListView.separated(
               itemBuilder: (context, index) {
-                return EventItem(
-                  event: eventListProvider.filterEventList [index],);
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.eventDetailsRouteName,
+                      arguments: eventListProvider.filterEventList[index],
+                    );
+                  },
+                  child: EventItem(
+                    event: eventListProvider.filterEventList [index],),
+                );
               },
               itemCount: eventListProvider.filterEventList.length,
               separatorBuilder: (context, index) {

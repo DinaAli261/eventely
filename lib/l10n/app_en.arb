@@ -73,5 +73,8 @@
 "no_event_found":"No Event Found",
 "event_added_successfully":"Event Added Successfully",
 "event_updated_successfully":"Event Updated Successfully",
-"no_favorite_event_found":"No Favorite Event Found"
+"no_favorite_event_found":"No Favorite Event Found",
+"some_thing_went_wrong":"Some Thing Went Wrong",
+"event_details":"Event Details",
+"event_deleted_successfully":"Event Deleted Successfully"
 }

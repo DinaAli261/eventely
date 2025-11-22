@@ -228,4 +228,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get no_favorite_event_found => 'لم يتم العثور على حدث مفضل';
+
+  @override
+  String get some_thing_went_wrong => 'حدث خطأ ما';
+
+  @override
+  String get event_details => 'تفاصيل الحدث';
+
+  @override
+  String get event_deleted_successfully => 'تم حذف الحدث بنحاح';
 }

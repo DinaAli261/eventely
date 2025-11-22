@@ -8,6 +8,7 @@ import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/providers/event_list_provider.dart';
 import 'package:evently/ui/first_screen/first_screen.dart';
 import 'package:evently/ui/home/add_event/add_event.dart';
+import 'package:evently/ui/home/event_details.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/onboarding/onboarding_screen.dart';
@@ -24,7 +25,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseFirestore.instance.disableNetwork();
+  // await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppLanguageProvider(),),
@@ -56,7 +57,9 @@ class MyApp extends StatelessWidget {
           AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
           AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
           AppRoutes.resetPasswordRouteName: (context) => ResetPassword(),
-          AppRoutes.addEventRouteName: (context) => AddEvent()
+          AppRoutes.addEventRouteName: (context) => AddEvent(),
+          AppRoutes.eventDetailsRouteName: (context) => EventDetails()
+
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,

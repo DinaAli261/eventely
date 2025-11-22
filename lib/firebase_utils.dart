@@ -18,4 +18,11 @@ class FirebaseUtils {
     event.id = docRef.id;
     return docRef.set(event);
   }
+
+  static Future<void> deleteEventFromFireStore(String eventId) async {
+    await FirebaseFirestore.instance
+        .collection(Event.collectionName)
+        .doc(eventId)
+        .delete();
+  }
 }
