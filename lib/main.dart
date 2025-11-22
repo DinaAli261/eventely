@@ -1,7 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/auth/login/login_screen.dart';
+import 'package:evently/auth/register/register_screen.dart';
+import 'package:evently/auth/reset_password/reset_password.dart';
+import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/providers/app_language_provider.dart';
+import 'package:evently/providers/app_theme_provider.dart';
+import 'package:evently/providers/event_list_provider.dart';
+import 'package:evently/ui/first_screen/first_screen.dart';
+import 'package:evently/ui/home/add_event/add_event.dart';
+import 'package:evently/ui/home/event_details.dart';
+import 'package:evently/ui/home/home_screen.dart';
+import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
+import 'package:evently/ui/onboarding/onboarding_screen.dart';
+import 'package:evently/utils/app_routes.dart';
+import 'package:evently/utils/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // await FirebaseFirestore.instance.disableNetwork();
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppLanguageProvider(),),
+        ChangeNotifierProvider(create: (context) => AppThemeProvider(),),
+        ChangeNotifierProvider(create: (context) => EventListProvider(),),
+
+      ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,6 +41,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    var themeProvider = Provider.of<AppThemeProvider>(context);
+    var languageProvider = Provider.of<AppLanguageProvider>(context);
+    return MaterialApp(
+      locale: Locale(languageProvider.appLanguage),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.firstScreenRouteName,
+        routes: {
+          AppRoutes.onboardingRouteName: (context) => OnBoardingScreen(),
+          AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+          AppRoutes.profileRouteName: (context) => ProfileTab(),
+          AppRoutes.firstScreenRouteName: (context) => FirstScreen(),
+          AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
+          AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
+          AppRoutes.resetPasswordRouteName: (context) => ResetPassword(),
+          AppRoutes.addEventRouteName: (context) => AddEvent(),
+          AppRoutes.eventDetailsRouteName: (context) => EventDetails()
+
+        },
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+      themeMode: themeProvider.appTheme,
+    );
   }
 }

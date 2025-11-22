@@ -1,0 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/model/event.dart';
+
+class FirebaseUtils {
+  static CollectionReference<Event> getEventCollection() {
+    return FirebaseFirestore.instance
+        .collection(Event.collectionName)
+        .withConverter<Event>(
+          fromFirestore: (snapshot, options) =>
+              Event.fromJasonFireStore(snapshot.data()!),
+          toFirestore: (event, options) => event.toJasonFireStore(),
+        );
+  }
+
+  static Future<void> addEventToFireStore(Event event) {
+    CollectionReference<Event> collectionRef = getEventCollection();
+    DocumentReference<Event> docRef = collectionRef.doc();
+    event.id = docRef.id;
+    return docRef.set(event);
+  }
+
+  static Future<void> deleteEventFromFireStore(String eventId) async {
+    await FirebaseFirestore.instance
+        .collection(Event.collectionName)
+        .doc(eventId)
+        .delete();
+  }
+}
