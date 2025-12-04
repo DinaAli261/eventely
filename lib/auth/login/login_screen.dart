@@ -5,6 +5,8 @@ import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
 import 'package:evently/utils/app_routes.dart';
+import 'package:evently/utils/dialog_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/first_screen/select_widget.dart';
@@ -18,10 +20,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
+  TextEditingController emailController = TextEditingController(
+      text: "sarah.ahmed22@example.com");
+  TextEditingController passwordController = TextEditingController(
+      text: "Sarah2024@");
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -178,10 +180,41 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login() {
+  void login() async {
     if (formKey.currentState?.validate() == true) {
       //todo:login
-      Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreenRouteName);
+      DialogUtils.showLoading(context: context);
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context,
+            title: "Success",
+            message: "Login Successfully.",
+            posActionName: 'ok',
+            posAction: () {
+              Navigator.of(context).pushReplacementNamed(
+                  AppRoutes.homeScreenRouteName);
+            });
+        print(credential.user?.uid ?? '');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-credential') {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(context: context,
+              message: "the supplied auth credential is incorrect, malformed or has expired.",
+              title: "Error",
+              posActionName: 'ok');
+        }
+      } catch (e) {
+        DialogUtils.hideLoading(context: context);
+        DialogUtils.showMessage(context: context,
+            message: e.toString(),
+            title: "Error",
+            posActionName: 'ok');
+      }
     }
   }
 }

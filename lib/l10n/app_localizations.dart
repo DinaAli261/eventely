@@ -529,6 +529,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Favorite Event Found'**
   String get no_favorite_event_found;
+
+  /// No description provided for @some_thing_went_wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Some Thing Went Wrong'**
+  String get some_thing_went_wrong;
+
+  /// No description provided for @event_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get event_details;
+
+  /// No description provided for @event_deleted_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Deleted Successfully'**
+  String get event_deleted_successfully;
 }
 
 class _AppLocalizationsDelegate

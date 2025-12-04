@@ -284,31 +284,42 @@ class _AddEventState extends State<AddEvent> {
     setState(() {});
   }
 
-  void addEvent() {
-    isSelectedDate = (selectedDate == null) ? false : true;
-    isSelectedTime = (selectedDate == null) ? false : true;
+  Future<void> addEvent() async {
+    isSelectedDate = (selectedDate != null);
+    isSelectedTime = (selectedTime != null);
     setState(() {});
-    if (formKey.currentState?.validate() == true &&
-        selectedTime != null &&
-        selectedDate != null) {
-      //todo: add event in fireStore
-      Event event = Event(title: titleController.text,
-          description: descriptionController.text,
-          eventImage: selectedEventImage,
-          eventName: selectedEventName,
-          eventDateTime: selectedDate!,
-          eventTime: formatTime);
-      FirebaseUtils.addEventToFireStore(event).timeout(
-        Duration(seconds: 1), onTimeout: () {
+
+    if (formKey.currentState?.validate() == true && selectedDate != null &&
+        selectedTime != null) {
+      Event event = Event(
+        title: titleController.text,
+        description: descriptionController.text,
+        eventImage: selectedEventImage,
+        eventName: selectedEventName,
+        eventDateTime: selectedDate!,
+        eventTime: formatTime,
+      );
+
+      try {
+        await FirebaseUtils.addEventToFireStore(event);
+        await eventListProvider.getAllEvents();
+
         ToastUtils.showToastMsg(
-            msg: AppLocalizations.of(context)!.event_added_successfully,
-            color: Theme
-                .of(context)
-                .canvasColor);
-        eventListProvider.getAllEvents();
+          msg: AppLocalizations.of(context)!.event_added_successfully,
+          color: Theme
+              .of(context)
+              .canvasColor,
+        );
         Navigator.pop(context);
+      } catch (e) {
+        ToastUtils.showToastMsg(
+          msg: AppLocalizations.of(context)!.some_thing_went_wrong,
+          color: Colors.red,
+        );
+        print("Error adding event: $e");
       }
-        ,);
     }
   }
+
 }
+
