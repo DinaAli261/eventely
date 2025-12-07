@@ -7,8 +7,9 @@ import 'package:evently/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FavoriteTab extends StatefulWidget {
+import '../../../../providers/user_provider.dart';
 
+class FavoriteTab extends StatefulWidget {
   const FavoriteTab({super.key});
 
   @override
@@ -17,23 +18,19 @@ class FavoriteTab extends StatefulWidget {
 
 class _FavoriteTabState extends State<FavoriteTab> {
   TextEditingController searchController = TextEditingController();
-  late EventListProvider eventListProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      eventListProvider.getALLFavoriteEvents();
-    },);
-  }
 
   @override
   Widget build(BuildContext context) {
-    eventListProvider = Provider.of<EventListProvider>(context);
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final eventListProvider = Provider.of<EventListProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    var height = MediaQuery.of(context).size.height;
+
+    eventListProvider.loadEvents();
+
+    final favoriteList = eventListProvider.events
+        .where((e) => e.isFavorite)
+        .toList();
+
     return SafeArea(
       child: Column(
         children: [
@@ -45,28 +42,26 @@ class _FavoriteTabState extends State<FavoriteTab> {
               prefixIcon: Icons.search,
               hintText: AppLocalizations.of(context)!.searchForEvent,
               hintStyle: AppTextStyles.blue14Bold,
-
             ),
           ),
-          SizedBox(
-            height: 0.756 * height,
-            child: Expanded(child:
-            eventListProvider.favoriteList.isEmpty ?
-            Center(child: Text(
-              AppLocalizations.of(context)!.no_favorite_event_found,
-              style: AppTextStyles.blue20Medium,))
+          Expanded(
+            child: favoriteList.isEmpty
+                ? Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.no_favorite_event_found,
+                      style: AppTextStyles.blue20Medium,
+                    ),
+                  )
                 : ListView.separated(
               itemBuilder: (context, index) {
-                return EventItem(event: eventListProvider.favoriteList[index]);
-              },
-              itemCount: eventListProvider.favoriteList.length,
-              separatorBuilder: (context, index) {
-                return SizedBox(height: height * 0.019,);
-              },
-            )
+                      return EventItem(event: favoriteList[index]);
+                    },
+                    itemCount: favoriteList.length,
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: height * 0.019);
+                    },
             ),
-          )
-
+          ),
         ],
       ),
     );

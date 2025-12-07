@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../providers/user_provider.dart';
+
 class EventItem extends StatelessWidget {
   final Event event;
 
@@ -21,6 +23,7 @@ class EventItem extends StatelessWidget {
         .size
         .height;
     var eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     return Container(
         margin: EdgeInsets.only(
           left: height * 0.019,
@@ -80,8 +83,8 @@ class EventItem extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: (() {
-                          eventListProvider.updateIsFavoriteEvent(
-                              event, context);
+                          eventListProvider.toggleFavorite(
+                              userProvider.currentUser!.id);
 
                         }),
                         child: Icon((event.isFavorite) ? Icons.favorite : Icons
