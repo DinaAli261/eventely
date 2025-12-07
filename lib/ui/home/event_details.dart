@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../providers/event_list_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../utils/App_text_styles.dart';
 import '../../utils/app_colors.dart';
 
@@ -14,6 +15,7 @@ class EventDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final event = ModalRoute.of(context)!.settings.arguments as Event;
     final eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +28,7 @@ class EventDetails extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.edit_outlined)),
           IconButton(
             onPressed: () {
-              eventListProvider.deleteEvent(event, context);
+              eventListProvider.deleteEvent(userProvider.currentUser!.id);
               Navigator.pop(context);
             },
             icon: Icon(Icons.delete_outline),

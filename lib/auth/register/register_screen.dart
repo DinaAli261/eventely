@@ -1,8 +1,13 @@
+import 'package:evently/firebase_utils.dart';
+import 'package:evently/model/my_user.dart';
 import 'package:evently/utils/dialog_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../providers/event_list_provider.dart';
+import '../../providers/user_provider.dart';
 import '../../ui/first_screen/select_widget.dart';
 import '../../ui/home/widget/custom_elevated_button.dart';
 import '../../ui/home/widget/custom_text_form_field.dart';
@@ -106,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     prefixIcon: Icons.lock,
                     controller: rePasswordController,
                     hintText: AppLocalizations.of(context)!.re_password,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     obscuringCharacter: "*",
                     obscureText: true,
                     validator: (text) {
@@ -168,6 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void register() async {
     if (formKey.currentState?.validate() == true) {
       //todo:register
+      //todo:show loading
       DialogUtils.showLoading(context: context);
       try {
         final credential = await FirebaseAuth.instance
@@ -175,12 +181,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: emailController.text,
           password: passwordController.text,
         );
+        //todo:save user in firebaseFireStore
+        MyUser myUser = MyUser(
+            id: credential.user?.uid ?? '',
+            name: nameController.text,
+            email: emailController.text
+        );
+        await FirebaseUtils.addUserToFireStore(myUser);
+        //todo:save user in provider
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(myUser);
+        //todo:hide loading
         DialogUtils.hideLoading(context: context);
         DialogUtils.showMessage(context: context,
             title: "Success",
             message: "Register Successfully.",
             posActionName: 'ok',
-            posAction: () {
+
+            posAction: () async {
+              var eventProvider = Provider.of<EventListProvider>(
+                  context, listen: false);
+              await eventProvider.loadEvents();
               Navigator.of(context).pushNamedAndRemoveUntil(
                 AppRoutes.homeScreenRouteName,
                     (route) => false,);

@@ -1,4 +1,6 @@
+import 'package:evently/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui/home/widget/custom_elevated_button.dart';
 import 'package:evently/ui/home/widget/custom_text_form_field.dart';
 import 'package:evently/utils/App_text_styles.dart';
@@ -8,7 +10,9 @@ import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/dialog_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/event_list_provider.dart';
 import '../../ui/first_screen/select_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,9 +25,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController(
-      text: "sarah.ahmed22@example.com");
+      text: "mariam.ahmed.test@example.com");
   TextEditingController passwordController = TextEditingController(
-      text: "Sarah2024@");
+      text: "Mariam@12345");
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -57,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         final bool emailValid =
                         RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(text);
                         if (!emailValid) {
                           return AppLocalizations.of(context)!
@@ -183,6 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() async {
     if (formKey.currentState?.validate() == true) {
       //todo:login
+      //todo:show loading
       DialogUtils.showLoading(context: context);
       try {
         final credential = await FirebaseAuth.instance
@@ -190,12 +195,24 @@ class _LoginScreenState extends State<LoginScreen> {
             email: emailController.text,
             password: passwordController.text
         );
+        //todo:read user from firebaseFirestore
+        var user = await FirebaseUtils.readUserFromFireStore(
+            credential.user?.uid ?? '');
+        if (user == null) {
+          return;
+        }
+        //todo:save user in provider
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(user);
         DialogUtils.hideLoading(context: context);
         DialogUtils.showMessage(context: context,
             title: "Success",
             message: "Login Successfully.",
             posActionName: 'ok',
-            posAction: () {
+            posAction: () async {
+              var eventProvider = Provider.of<EventListProvider>(
+                  context, listen: false);
+              await eventProvider.loadEvents();
               Navigator.of(context).pushReplacementNamed(
                   AppRoutes.homeScreenRouteName);
             });

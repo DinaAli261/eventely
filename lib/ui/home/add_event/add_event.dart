@@ -1,4 +1,3 @@
-import 'package:evently/firebase_utils.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/model/event.dart';
 import 'package:evently/ui/home/add_event/widget/date_or_time_widget.dart';
@@ -12,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/event_list_provider.dart';
+import '../../../providers/user_provider.dart';
 import '../../../utils/App_text_styles.dart';
 import '../tabs/home/widget/event_tab_item.dart';
 
@@ -28,19 +28,36 @@ class _AddEventState extends State<AddEvent> {
   String selectedEventName = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   bool isSelectedDate = true;
   bool isSelectedTime = true;
   String formatTime = '';
+
   late EventListProvider eventListProvider;
+  late UserProvider userProvider;
+
+  List<String> eventNameKeys = [
+    'Sport',
+    'Birthday',
+    'Meeting',
+    'Gaming',
+    'Workshop',
+    'BookClub',
+    'Exhibition',
+    'Holiday',
+    'Eating',
+  ];
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     eventListProvider = Provider.of<EventListProvider>(context);
+    userProvider = Provider.of<UserProvider>(context);
 
     List<String> eventNameList = [
       AppLocalizations.of(context)!.sport,
@@ -53,6 +70,7 @@ class _AddEventState extends State<AddEvent> {
       AppLocalizations.of(context)!.holiday,
       AppLocalizations.of(context)!.eating,
     ];
+
     List<IconData> eventIconsList = [
       Icons.directions_bike_outlined,
       Icons.cake_outlined,
@@ -64,6 +82,7 @@ class _AddEventState extends State<AddEvent> {
       Icons.beach_access_outlined,
       Icons.fastfood_outlined,
     ];
+
     List<String> eventImages = [
       AppImages.sport,
       AppImages.birthday,
@@ -75,8 +94,10 @@ class _AddEventState extends State<AddEvent> {
       AppImages.holiday,
       AppImages.eating,
     ];
+
     selectedEventImage = eventImages[selectedIndex];
-    selectedEventName = eventNameList[selectedIndex];
+    selectedEventName = eventNameKeys[selectedIndex];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -98,7 +119,7 @@ class _AddEventState extends State<AddEvent> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadiusGeometry.circular(16),
+                  borderRadius: BorderRadius.circular(16),
                   child: Image.asset(eventImages[selectedIndex]),
                 ),
                 DefaultTabController(
@@ -108,7 +129,7 @@ class _AddEventState extends State<AddEvent> {
                     onTap: (index) {
                       selectedIndex = index;
                       selectedEventImage = eventImages[index];
-                      selectedEventName = eventNameList[index];
+                      selectedEventName = eventNameKeys[index];
                       setState(() {});
                     },
                     labelPadding: EdgeInsetsDirectional.only(
@@ -122,23 +143,24 @@ class _AddEventState extends State<AddEvent> {
                         .map(
                           (eventName) => EventTabItem(
                             icon:
-                                eventIconsList[eventNameList.indexOf(
-                                  eventName,
-                                )],
+                            eventIconsList[eventNameList.indexOf(eventName)],
                             eventName: eventName,
-                            isSelected:
-                                (selectedIndex ==
+                            isSelected: (selectedIndex ==
                                 eventNameList.indexOf(eventName)),
                             selectedBgColor: AppColors.blue,
                             borderColor: AppColors.blue,
-                            selectedTextStyle: Theme.of(
-                              context,
-                            ).textTheme.labelSmall,
+                            selectedTextStyle:
+                            Theme
+                                .of(context)
+                                .textTheme
+                                .labelSmall,
                             unSelectedTextStyle: AppTextStyles.blue16Medium,
-                            selectedIconColor: Theme.of(context).canvasColor,
+                            selectedIconColor: Theme
+                                .of(context)
+                                .canvasColor,
                             unSelectedIconColor: AppColors.blue,
                           ),
-                        )
+                    )
                         .toList(),
                   ),
                 ),
@@ -169,9 +191,8 @@ class _AddEventState extends State<AddEvent> {
                   controller: descriptionController,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
-                      return AppLocalizations.of(
-                        context,
-                      )!.please_enter_description;
+                      return AppLocalizations.of(context)!
+                          .please_enter_description;
                     }
                     return null;
                   },
@@ -183,21 +204,18 @@ class _AddEventState extends State<AddEvent> {
                   rowText: AppLocalizations.of(context)!.event_date,
                   rowTextButton: (selectedDate == null)
                       ? AppLocalizations.of(context)!.choose_date
-                      :
-                        //"${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"
-                  formatTime = DateFormat('dd/MM/yyyy').format(selectedDate!),
+                      : formatTime =
+                      DateFormat('dd/MM/yyyy').format(selectedDate!),
                   onPressed: onChooseDate,
                 ),
-                (isSelectedDate)
-                    ? SizedBox()
-                    : Align(
-                        alignment: AlignmentGeometry.directional(1, 300),
-                        child: Text(
-                          AppLocalizations.of(context)!.please_choose_date,
-                          style: AppTextStyles.red12Regular,
-                        ),
-                      ),
-
+                if (!isSelectedDate)
+                  Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Text(
+                      AppLocalizations.of(context)!.please_choose_date,
+                      style: AppTextStyles.red12Regular,
+                    ),
+                  ),
                 DateOrTimeWidget(
                   iconName: Icons.access_time,
                   rowText: AppLocalizations.of(context)!.event_time,
@@ -206,50 +224,14 @@ class _AddEventState extends State<AddEvent> {
                       : selectedTime!.format(context),
                   onPressed: onChooseTime,
                 ),
-                (isSelectedTime)
-                    ? SizedBox()
-                    : Align(
-                        alignment: AlignmentGeometry.directional(1, 300),
-                        child: Text(
-                          AppLocalizations.of(context)!.please_choose_time,
-                          style: AppTextStyles.red12Regular,
-                        ),
-                      ),
-                Text(
-                  AppLocalizations.of(context)!.location,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                SizedBox(height: height * 0.02),
-                CustomElevatedButton(
-                  onPressed: () {},
-                  text: AppLocalizations.of(context)!.choose_event_location,
-                  borderColor: AppColors.blue,
-                  backgroundColor: AppColors.transparent,
-                  haveIcon: true,
-                  textStyle: AppTextStyles.blue16Medium,
-                  padding: 0.02,
-                  items: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: AppColors.blue,
-                      ),
-                    ],
-                  ),
-                  icon: Container(
-                    width: 46,
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: AppColors.blue,
-                      borderRadius: BorderRadiusGeometry.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.my_location,
-                      color: Theme.of(context).canvasColor,
+                if (!isSelectedTime)
+                  Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Text(
+                      AppLocalizations.of(context)!.please_choose_time,
+                      style: AppTextStyles.red12Regular,
                     ),
                   ),
-                ),
                 SizedBox(height: height * 0.02),
                 CustomElevatedButton(
                   onPressed: addEvent,
@@ -284,12 +266,12 @@ class _AddEventState extends State<AddEvent> {
     setState(() {});
   }
 
-  Future<void> addEvent() async {
+  void addEvent() {
     isSelectedDate = (selectedDate != null);
     isSelectedTime = (selectedTime != null);
-    setState(() {});
 
-    if (formKey.currentState?.validate() == true && selectedDate != null &&
+    if (formKey.currentState?.validate() == true &&
+        selectedDate != null &&
         selectedTime != null) {
       Event event = Event(
         title: titleController.text,
@@ -300,10 +282,7 @@ class _AddEventState extends State<AddEvent> {
         eventTime: formatTime,
       );
 
-      try {
-        await FirebaseUtils.addEventToFireStore(event);
-        await eventListProvider.getAllEvents();
-
+      eventListProvider.addEvent(event).then((_) {
         ToastUtils.showToastMsg(
           msg: AppLocalizations.of(context)!.event_added_successfully,
           color: Theme
@@ -311,15 +290,15 @@ class _AddEventState extends State<AddEvent> {
               .canvasColor,
         );
         Navigator.pop(context);
-      } catch (e) {
+      }).catchError((e) {
         ToastUtils.showToastMsg(
           msg: AppLocalizations.of(context)!.some_thing_went_wrong,
           color: Colors.red,
         );
         print("Error adding event: $e");
-      }
+      });
+
+      setState(() {});
     }
   }
-
 }
-

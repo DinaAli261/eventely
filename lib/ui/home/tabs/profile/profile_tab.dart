@@ -1,14 +1,18 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui/home/tabs/profile/theme/theme_bottom_sheet.dart';
 import 'package:evently/ui/home/widget/custom_elevated_button.dart';
 import 'package:evently/utils/App_text_styles.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_images.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../providers/event_list_provider.dart';
+import '../../../../utils/app_routes.dart';
 import 'language/language_bottom_sheet.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -25,6 +29,7 @@ class _ProfileTabState extends State<ProfileTab> {
     var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -43,8 +48,9 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('RouteAcademy', style: AppTextStyles.offWhite24Bold,),
-                    Text('routeacadmy@gmail.com',
+                    Text(userProvider.currentUser!.name,
+                      style: AppTextStyles.offWhite24Bold,),
+                    Text(userProvider.currentUser!.email,
                       style: AppTextStyles.offWhite16Medium,
                       overflow: TextOverflow.visible,
                       softWrap: true,
@@ -140,7 +146,18 @@ class _ProfileTabState extends State<ProfileTab> {
               ),
               Spacer(),
               CustomElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final userProvider = Provider.of<UserProvider>(
+                      context, listen: false);
+                  final eventProvider = Provider.of<EventListProvider>(
+                      context, listen: false);
+
+                  await FirebaseAuth.instance.signOut();
+                  userProvider.clearUser();
+                  eventProvider.clearEvents();
+                  Navigator.of(context).pushReplacementNamed(
+                      AppRoutes.loginScreenRouteName);
+                },
                 text: AppLocalizations.of(context)!.logout,
                 icon: Icon(
                   Icons.logout, color: AppColors.offWhite, size: width * 0.06,),

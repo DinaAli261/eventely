@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/auth/login/login_screen.dart';
 import 'package:evently/auth/register/register_screen.dart';
 import 'package:evently/auth/reset_password/reset_password.dart';
@@ -6,6 +5,7 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/app_language_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/providers/event_list_provider.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:evently/ui/first_screen/first_screen.dart';
 import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/event_details.dart';
@@ -31,7 +31,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => AppLanguageProvider(),),
         ChangeNotifierProvider(create: (context) => AppThemeProvider(),),
         ChangeNotifierProvider(create: (context) => EventListProvider(),),
-
+        ChangeNotifierProvider(create: (context) => UserProvider(),),
       ],
       child: const MyApp()));
 }
