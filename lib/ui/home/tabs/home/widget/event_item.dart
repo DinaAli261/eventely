@@ -84,8 +84,8 @@ class EventItem extends StatelessWidget {
                     InkWell(
                         onTap: (() {
                           eventListProvider.toggleFavorite(
-                              userProvider.currentUser!.id);
-
+                              event.id
+                          );
                         }),
                         child: Icon((event.isFavorite) ? Icons.favorite : Icons
                             .favorite_border_outlined, color: AppColors.blue,)),

@@ -65,7 +65,6 @@ class _HomeTabState extends State<HomeTab> {
 
     var eventListProvider = Provider.of<EventListProvider>(context);
 
-    // فلترة الإيفنتس حسب التاب المختار
     List<Event> filteredEvents;
     if (selectedIndex == 0) {
       filteredEvents = eventListProvider.events;

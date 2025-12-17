@@ -115,4 +115,9 @@ class AppTextStyles {
     color: AppColors.darkBlue,
     fontSize: 20,
   );
+  static final TextStyle blue24Medium = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.blue,
+    fontSize: 24,
+  );
 }

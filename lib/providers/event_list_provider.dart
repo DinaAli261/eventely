@@ -52,16 +52,38 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavorite(String eventId) {
+  Future<void> toggleFavorite(String eventId) async {
+    final String? userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
+
     int index = _events.indexWhere((e) => e.id == eventId);
-    if (index != -1) {
-      _events[index].isFavorite = !_events[index].isFavorite;
-      notifyListeners();
-    }
+    if (index == -1) return;
+
+    _events[index].isFavorite = !_events[index].isFavorite;
+    notifyListeners();
+
+    await FirebaseUtils.updateEventInFireStore(_events[index], userId);
   }
 
   void clearEvents() {
     _events = [];
     notifyListeners();
+  }
+
+  Future<void> updateEvent(Event updatedEvent) async {
+    final String? userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
+
+    try {
+      await FirebaseUtils.updateEventInFireStore(updatedEvent, userId);
+
+      int index = _events.indexWhere((e) => e.id == updatedEvent.id);
+      if (index != -1) {
+        _events[index] = updatedEvent;
+        notifyListeners();
+      }
+    } catch (e) {
+      print('Error updating event: $e');
+    }
   }
 }

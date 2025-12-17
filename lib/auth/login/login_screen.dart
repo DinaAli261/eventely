@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/my_user.dart';
 import '../../providers/event_list_provider.dart';
 import '../../ui/first_screen/select_widget.dart';
 
@@ -159,7 +160,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.02),
                     CustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          var credential = await FirebaseUtils
+                              .signInWithGoogle();
+                          var user = await FirebaseUtils.readUserFromFireStore(
+                              credential.user!.uid
+                          );
+                          if (user == null) {
+                            user = MyUser(
+                              id: credential.user!.uid,
+                              email: credential.user!.email ?? '',
+                              name: credential.user!.displayName ?? '',
+                            );
+                            await FirebaseUtils.addUserToFireStore(user);
+                          }
+                          var userProvider = Provider.of<UserProvider>(
+                              context, listen: false);
+                          userProvider.updateUser(user);
+                          Navigator.of(context).pushReplacementNamed(
+                              AppRoutes.homeScreenRouteName
+                          );
+                        } catch (e) {
+                          // Handle errors
+                          DialogUtils.showMessage(
+                            context: context,
+                            title: "Error",
+                            message: e.toString(),
+                            posActionName: 'OK',
+                          );
+                        }
+                      },
                       text: AppLocalizations.of(context)!.login_with_google,
                       icon: Image.asset(AppImages.google),
                       backgroundColor: AppColors.transparent,
